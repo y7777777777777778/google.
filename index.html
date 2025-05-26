@@ -18,14 +18,15 @@
     }
     .top-nav {
       display: flex;
-      justify-content: flex-end;
+      justify-content: space-between;
       align-items: center;
       padding: 12px 24px;
       font-size: 14px;
       color: #5f6368;
       background: #fff;
     }
-    .top-nav a {
+    .nav-left a,
+    .nav-right a {
       color: #5f6368;
       text-decoration: none;
       margin-left: 20px;
@@ -33,8 +34,14 @@
       white-space: nowrap;
       cursor: pointer;
     }
-    .top-nav a:hover {
-      text-decoration: underline;
+    .nav-left a:first-child,
+    .nav-right a:first-child {
+      margin-left: 0;
+    }
+    .nav-left,
+    .nav-right {
+      display: flex;
+      align-items: center;
     }
     .app-icon {
       margin-left: 20px;
@@ -181,16 +188,20 @@
 <body>
   <!-- 上部ナビ -->
   <nav class="top-nav">
-    <a href="https://about.google/?fg=1" target="_blank">Googleについて</a>
-    <a href="https://store.google.com/" target="_blank">ストア</a>
-    <a href="https://mail.google.com/" target="_blank">Gmail</a>
-    <a href="https://www.google.com/imghp" target="_blank">画像</a>
-    <a href="https://accounts.google.com/ServiceLogin" target="_blank">ログイン</a>
-    <img
-      class="app-icon"
-      src="https://www.gstatic.com/images/branding/product/1x/googleg_32dp.png"
-      alt="Google Apps"
-    />
+    <div class="nav-left">
+      <a href="https://about.google/?fg=1" target="_blank">Googleについて</a>
+      <a href="https://store.google.com/" target="_blank">ストア</a>
+    </div>
+    <div class="nav-right">
+      <a href="https://mail.google.com/" target="_blank">Gmail</a>
+      <a href="https://www.google.com/imghp" target="_blank">画像</a>
+      <a href="https://accounts.google.com/ServiceLogin" target="_blank">ログイン</a>
+      <img
+        class="app-icon"
+        src="https://www.gstatic.com/images/branding/product/1x/googleg_32dp.png"
+        alt="Google Apps"
+      />
+    </div>
   </nav>
 
   <!-- ロゴ -->
@@ -216,22 +227,16 @@
         autofocus
       />
       <div class="search-icons">
-        <!-- 画像検索 -->
         <img
           src="https://www.gstatic.com/images/icons/material/system/1x/photo_camera_grey600_24dp.png"
           alt="画像で検索"
           title="画像で検索"
-          role="button"
-          tabindex="0"
           onclick="window.open('https://www.google.com/imghp', '_blank')"
         />
-        <!-- 音声検索 -->
         <img
           src="https://www.gstatic.com/images/icons/material/system/1x/mic_grey600_24dp.png"
-          alt="音声で検索"
-          title="音声で検索"
-          role="button"
-          tabindex="0"
+          alt="音声検索"
+          title="音声検索"
           onclick="window.open('https://www.google.com/search?q=音声検索', '_blank')"
         />
       </div>
