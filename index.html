@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -69,12 +68,15 @@
       flex-direction: column;
     }
     .iframe-toolbar {
-      display: flex;
+      display: none;
       justify-content: center;
       gap: 10px;
       padding: 10px;
       background-color: #f1f1f1;
       flex-wrap: wrap;
+    }
+    .iframe-toolbar.active {
+      display: flex;
     }
     .iframe-toolbar button {
       padding: 8px 16px;
@@ -116,13 +118,25 @@
   </div>
 
   <div class="iframe-container" id="iframeContainer">
-    <div class="iframe-toolbar">
+    <div class="iframe-toolbar" id="toolbar78">
       <button onclick="loadSite('https://solar.bomberfish.ca/')">Solar OS</button>
-      <button onclick="loadSite('https://thickofit.moldeo.org/')">Interstellarプロキシ（広告多め）</button>
+      <button onclick="loadSite('https://thickofit.moldeo.org/')">Interstellarプロキシ</button>
       <button onclick="loadSite('https://offcha.com/room/dlKme6WVrCcoPyyoanrT')">避難用Chat</button>
       <button onclick="loadSite('https://chat-u5k5.onrender.com/')">6年Chat</button>
-      <button onclick="loadSite('https://light.6nenn.patrickwrede.com/')">自作Interstellarプロキシ（広告多め）</button>
+      <button onclick="loadSite('https://light.6nenn.patrickwrede.com/')">自作Interstellar</button>
       <button onclick="loadSite('https://benkyou.ycare.org/')">自作shadowプロキシ</button>
+      <button onclick="goBack()">戻る</button>
+    </div>
+    <div class="iframe-toolbar" id="toolbar61">
+
+      <button onclick="loadSite('https://solar.bomberfish.ca/')">Solar OS</button>
+      <button onclick="loadSite('https://thickofit.moldeo.org/')">Interstellarプロキシ</button>
+      <button onclick="loadSite('https://offcha.com/room/dlKme6WVrCcoPyyoanrT')">避難用Chat</button>
+      <button onclick="loadSite('https://chat-u5k5.onrender.com/')">6年Chat</button>
+      <button onclick="loadSite('https://light.6nenn.patrickwrede.com/')">自作Interstellar</button>
+      <button onclick="loadSite('https://benkyou.ycare.org/')">自作shadowプロキシ</button>
+       <button onclick="loadSite('https://six1chat.onrender.com/')">6-1だけchat</button>
+      
       <button onclick="goBack()">戻る</button>
     </div>
     <iframe id="embeddedFrame" src=""></iframe>
@@ -146,19 +160,27 @@
       const input = document.getElementById("searchInput").value.trim();
 
       if (input === "roguinn78") {
-        showIframeMode("https://solar.bomberfish.ca/");
+        showIframeMode("toolbar78", "https://solar.bomberfish.ca/");
       } else if (input === "roguinn61") {
-        showIframeMode("https://solar.bomberfish.ca/"); // 将来変えるならこのURLを変更
+        showIframeMode("toolbar61", "https://www.khanacademy.org/");
       } else {
         window.location.href = "https://www.google.com/search?q=" + encodeURIComponent(input);
       }
     }
 
-    function showIframeMode(initialUrl) {
+    function showIframeMode(toolbarId, initialUrl) {
       document.getElementById("mainContent").style.display = "none";
       document.querySelector("header").style.display = "none";
       document.querySelector("footer").style.display = "none";
       document.getElementById("iframeContainer").style.display = "flex";
+
+      // 全てのツールバーを非表示
+      document.querySelectorAll('.iframe-toolbar').forEach(tb => tb.classList.remove("active"));
+
+      // 指定のツールバーだけ表示
+      document.getElementById(toolbarId).classList.add("active");
+
+      // 最初のURL読み込み
       loadSite(initialUrl);
     }
 
@@ -172,6 +194,9 @@
       document.querySelector("header").style.display = "flex";
       document.querySelector("footer").style.display = "flex";
       document.getElementById("embeddedFrame").src = "";
+
+      // 全ツールバー非表示に戻す
+      document.querySelectorAll('.iframe-toolbar').forEach(tb => tb.classList.remove("active"));
     }
   </script>
 </body>
