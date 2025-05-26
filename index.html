@@ -30,7 +30,6 @@
       color: #5f6368;
       text-decoration: none;
       margin-left: 20px;
-      line-height: 24px;
       white-space: nowrap;
       cursor: pointer;
     }
@@ -104,7 +103,8 @@
       text-align: center;
     }
     input[type="submit"],
-    input[type="button"] {
+    input[type="button"],
+    button {
       background-color: #f8f9fa;
       border: 1px solid #f8f9fa;
       border-radius: 4px;
@@ -117,7 +117,8 @@
       transition: background-color 0.2s, box-shadow 0.2s, border-color 0.2s;
     }
     input[type="submit"]:hover,
-    input[type="button"]:hover {
+    input[type="button"]:hover,
+    button:hover {
       border: 1px solid #dadce0;
       box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
       background-color: #f8f9fa;
@@ -256,6 +257,10 @@
     <div id="secretContent">
       <h2>🎉 秘密のページ 🎉</h2>
       <p>これは「roguinn78」と検索した人だけが見られる隠しページです。</p>
+      <p>
+        <button id="showUrlBtn">このサイトのURLを表示</button>
+      </p>
+      <p id="siteUrlText" style="margin-top: 8px; color: #1a73e8;"></p>
       <button id="closeBtn">閉じる</button>
     </div>
   </div>
@@ -281,6 +286,8 @@
     const queryInput = document.getElementById("query");
     const secretModal = document.getElementById("secretModal");
     const closeBtn = document.getElementById("closeBtn");
+    const showUrlBtn = document.getElementById("showUrlBtn");
+    const siteUrlText = document.getElementById("siteUrlText");
 
     form.addEventListener("submit", (e) => {
       e.preventDefault();
@@ -301,6 +308,14 @@
       if (e.target === secretModal) {
         secretModal.style.display = "none";
       }
+    });
+
+    showUrlBtn.addEventListener("click", () => {
+      const url = window.location.href;
+      siteUrlText.innerHTML = `このサイトのURL: <a href="${url}" target="_blank">${url}</a>`;
+      navigator.clipboard.writeText(url).then(() => {
+        console.log("URL copied to clipboard");
+      });
     });
   </script>
 </body>
