@@ -5,11 +5,9 @@
   <title>Google</title>
   <link rel="icon" href="https://www.google.com/favicon.ico" />
   <style>
-    /* Reset */
     * {
       box-sizing: border-box;
     }
-
     body {
       margin: 0;
       font-family: Arial, sans-serif;
@@ -17,7 +15,6 @@
       color: #202124;
       user-select: none;
     }
-
     /* 上部ナビゲーション */
     .top-nav {
       display: flex;
@@ -28,19 +25,17 @@
       color: #5f6368;
       background: #fff;
     }
-
     .top-nav a {
       color: #5f6368;
       text-decoration: none;
       margin-left: 20px;
       line-height: 24px;
       white-space: nowrap;
+      cursor: pointer; /* クリック可能に */
     }
-
     .top-nav a:hover {
       text-decoration: underline;
     }
-
     .app-icon {
       margin-left: 20px;
       cursor: pointer;
@@ -49,25 +44,23 @@
       filter: grayscale(100%);
       transition: filter 0.3s;
     }
-
     .app-icon:hover {
       filter: grayscale(0%);
     }
-
     /* ロゴ */
     .logo {
       margin: 120px auto 0;
       width: 272px;
       height: 92px;
     }
-
     /* 検索ボックス */
     .search-box {
       margin-top: 24px;
+      text-align: center; /* 中央寄せ */
     }
-
     input[type="text"] {
       width: 584px;
+      max-width: 90vw; /* 画面幅に合わせて調整 */
       padding: 14px 20px;
       font-size: 16px;
       border: 1px solid #dfe1e5;
@@ -76,17 +69,15 @@
       box-shadow: none;
       transition: box-shadow 0.2s;
     }
-
     input[type="text"]:focus {
       box-shadow: 0 0 5px #4285f4;
       border-color: #4285f4;
     }
-
     /* 検索ボタン */
     .buttons {
       margin-top: 36px;
+      text-align: center; /* 中央寄せ */
     }
-
     input[type="submit"],
     input[type="button"] {
       background-color: #f8f9fa;
@@ -100,7 +91,6 @@
       user-select: none;
       transition: background-color 0.2s, box-shadow 0.2s, border-color 0.2s;
     }
-
     input[type="submit"]:hover,
     input[type="button"]:hover {
       border: 1px solid #dadce0;
@@ -108,19 +98,16 @@
       background-color: #f8f9fa;
       color: #202124;
     }
-
-    /* モーダル */
+    /* モーダル（初期は非表示） */
     #secretModal {
       display: none;
       position: fixed;
       inset: 0;
       background-color: rgba(0, 0, 0, 0.8);
       z-index: 9999;
-      display: flex;
       justify-content: center;
       align-items: center;
     }
-
     #secretContent {
       background: white;
       padding: 30px 40px;
@@ -132,7 +119,6 @@
       color: #202124;
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
     }
-
     #closeBtn {
       margin-top: 24px;
       padding: 10px 24px;
@@ -145,11 +131,9 @@
       user-select: none;
       transition: background-color 0.2s;
     }
-
     #closeBtn:hover {
       background-color: #155ab6;
     }
-
     /* フッター */
     footer {
       font-size: 14px;
@@ -164,15 +148,14 @@
       justify-content: space-between;
       user-select: none;
     }
-
     footer .left-links a,
     footer .right-links a {
       color: #70757a;
       text-decoration: none;
       margin: 0 12px;
       white-space: nowrap;
+      cursor: pointer; /* クリック可能 */
     }
-
     footer .left-links a:hover,
     footer .right-links a:hover {
       text-decoration: underline;
@@ -182,11 +165,11 @@
 <body>
   <!-- 上部ナビ -->
   <nav class="top-nav" aria-label="グローバルナビゲーション">
-    <a href="#">Googleについて</a>
-    <a href="#">ストア</a>
-    <a href="#">Gmail</a>
-    <a href="#">画像</a>
-    <a href="#">ログイン</a>
+    <a href="#" onclick="alert('リンク先未設定です'); return false;">Googleについて</a>
+    <a href="#" onclick="alert('リンク先未設定です'); return false;">ストア</a>
+    <a href="#" onclick="alert('リンク先未設定です'); return false;">Gmail</a>
+    <a href="#" onclick="alert('リンク先未設定です'); return false;">画像</a>
+    <a href="#" onclick="alert('リンク先未設定です'); return false;">ログイン</a>
     <img
       class="app-icon"
       src="https://www.gstatic.com/images/branding/product/1x/googleg_32dp.png"
@@ -244,15 +227,15 @@
   <!-- フッター -->
   <footer>
     <div class="left-links" aria-label="フッター左">
-      <a href="#">日本</a>
-      <a href="#">広告</a>
-      <a href="#">ビジネス</a>
-      <a href="#">検索の仕組み</a>
+      <a href="#" onclick="alert('リンク先未設定です'); return false;">日本</a>
+      <a href="#" onclick="alert('リンク先未設定です'); return false;">広告</a>
+      <a href="#" onclick="alert('リンク先未設定です'); return false;">ビジネス</a>
+      <a href="#" onclick="alert('リンク先未設定です'); return false;">検索の仕組み</a>
     </div>
     <div class="right-links" aria-label="フッター右">
-      <a href="#">プライバシー</a>
-      <a href="#">規約</a>
-      <a href="#">設定</a>
+      <a href="#" onclick="alert('リンク先未設定です'); return false;">プライバシー</a>
+      <a href="#" onclick="alert('リンク先未設定です'); return false;">規約</a>
+      <a href="#" onclick="alert('リンク先未設定です'); return false;">設定</a>
     </div>
   </footer>
 
@@ -261,13 +244,17 @@
     const modal = document.getElementById("secretModal");
     const closeBtn = document.getElementById("closeBtn");
 
+    // モーダルは初期非表示なのでここで確実に非表示設定（念のため）
+    modal.style.display = "none";
+
     form.addEventListener("submit", (e) => {
       e.preventDefault();
       const query = document.getElementById("query").value.trim().toLowerCase();
 
       if (query === "roguinn78") {
-        modal.style.display = "flex";
+        modal.style.display = "flex"; // モーダル表示
       } else {
+        // 普通はgoogle検索に飛ばす
         window.location.href = `https://www.google.com/search?q=${encodeURIComponent(query)}`;
       }
     });
@@ -276,14 +263,14 @@
       modal.style.display = "none";
     });
 
-    // モーダルの外クリックで閉じる
+    // モーダルの背景クリックで閉じる
     window.addEventListener("click", (e) => {
       if (e.target === modal) {
         modal.style.display = "none";
       }
     });
 
-    // Enterキーでも閉じられるように
+    // キーボードで閉じる処理（Enter, Space）
     closeBtn.addEventListener("keyup", (e) => {
       if (e.key === "Enter" || e.key === " ") {
         modal.style.display = "none";
