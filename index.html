@@ -3,22 +3,54 @@
 <head>
   <meta charset="UTF-8">
   <title>Google</title>
+  <link rel="icon" href="https://www.google.com/favicon.ico">
   <style>
     body {
+      margin: 0;
+      padding: 0;
       font-family: Arial, sans-serif;
-      text-align: center;
-      margin-top: 100px;
       background-color: #fff;
+      text-align: center;
     }
+
+    .logo {
+      margin-top: 120px;
+    }
+
+    .logo img {
+      width: 272px;
+      height: 92px;
+    }
+
+    .search-box {
+      margin-top: 20px;
+    }
+
     input[type="text"] {
-      width: 400px;
-      padding: 10px;
+      width: 580px;
+      padding: 14px 20px;
       font-size: 16px;
+      border: 1px solid #dfe1e5;
+      border-radius: 24px;
+      outline: none;
+      box-shadow: none;
     }
+
     input[type="submit"] {
+      margin-top: 30px;
       padding: 10px 20px;
-      font-size: 16px;
-      margin-left: 10px;
+      font-size: 14px;
+      border: none;
+      border-radius: 4px;
+      background-color: #f8f9fa;
+      color: #3c4043;
+      cursor: pointer;
+      margin-right: 10px;
+    }
+
+    input[type="submit"]:hover {
+      border: 1px solid #dadce0;
+      box-shadow: 0 1px 1px rgba(0,0,0,.1);
     }
 
     /* モーダル用スタイル */
@@ -40,7 +72,7 @@
       padding: 30px;
       border-radius: 10px;
       max-width: 600px;
-      width: 80%;
+      width: 90%;
       text-align: center;
     }
 
@@ -53,18 +85,23 @@
   </style>
 </head>
 <body>
-  <h1 style="font-size: 64px; color: #4285f4;">Google</h1>
+  <div class="logo">
+    <img src="https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png" alt="Google">
+  </div>
 
-  <form id="searchForm">
-    <input type="text" id="query" placeholder="Google検索">
-    <input type="submit" value="検索">
+  <form id="searchForm" class="search-box">
+    <input type="text" id="query" placeholder="Google 検索">
+    <div>
+      <input type="submit" value="Google 検索">
+      <input type="button" value="I'm Feeling Lucky" onclick="window.location.href='https://www.google.com/doodles';">
+    </div>
   </form>
 
-  <!-- モーダル：隠しページ -->
+  <!-- モーダル -->
   <div id="secretModal">
     <div id="secretContent">
       <h2>🎉 秘密のページ 🎉</h2>
-      <p>ようこそ、「roguinn78」と検索した人だけが見られる秘密の内容です。</p>
+      <p>これは「roguinn78」と検索した人だけが見られる隠しページです。</p>
       <button id="closeBtn">閉じる</button>
     </div>
   </div>
@@ -79,10 +116,8 @@
       const query = document.getElementById("query").value.trim().toLowerCase();
 
       if (query === "roguinn78") {
-        // モーダル表示
         modal.style.display = "flex";
       } else {
-        // 本物のGoogleにリダイレクト
         window.location.href = `https://www.google.com/search?q=${encodeURIComponent(query)}`;
       }
     });
