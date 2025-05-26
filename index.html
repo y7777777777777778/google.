@@ -1,222 +1,249 @@
+
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="UTF-8" />
-  <title>Google</title>
-  <link rel="icon" href="https://www.google.com/favicon.ico" />
-  <style>
-    * { box-sizing: border-box; }
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #fff;
-      color: #202124;
-    }
-    .top-nav {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 12px 24px;
-      font-size: 14px;
-      color: #5f6368;
-    }
-    .nav-left a, .nav-right a {
-      color: #5f6368;
-      text-decoration: none;
-      margin-left: 20px;
-      white-space: nowrap;
-    }
-    .nav-left a:first-child, .nav-right a:first-child { margin-left: 0; }
-    .nav-left, .nav-right { display: flex; align-items: center; }
-    .app-icon {
-      margin-left: 20px;
-      cursor: pointer;
-      width: 32px;
-      height: 32px;
-      filter: grayscale(100%);
-    }
-    .logo {
-      margin: 120px auto 0;
-      width: 272px;
-      height: 92px;
-    }
-    .search-box {
-      text-align: center;
-      margin-top: 24px;
-    }
-    .search-container {
-      display: inline-flex;
-      align-items: center;
-    }
-    .search-icons {
-      display: flex;
-      gap: 12px;
-      margin-left: 8px;
-    }
-    .search-icons img {
-      width: 24px;
-      height: 24px;
-      cursor: pointer;
-    }
-    input[type="text"] {
-      width: 584px;
-      max-width: 90vw;
-      padding: 14px 20px;
-      font-size: 16px;
-      border: 1px solid #dfe1e5;
-      border-radius: 24px;
-      outline: none;
-    }
-    .buttons {
-      margin-top: 36px;
-      text-align: center;
-    }
-    input[type="submit"],
-    input[type="button"],
-    button {
-      background-color: #f8f9fa;
-      border: 1px solid #f8f9fa;
-      border-radius: 4px;
-      color: #3c4043;
-      font-size: 14px;
-      padding: 10px 20px;
-      margin: 0 6px;
-      cursor: pointer;
-    }
-    #secretModal {
-      display: none;
-      position: fixed;
-      inset: 0;
-      background-color: rgba(0,0,0,0.85);
-      z-index: 9999;
-      justify-content: center;
-      align-items: center;
-    }
-    #secretContent {
-      background: white;
-      width: 98vw;
-      height: 98vh;
-      padding: 24px;
-      overflow-y: auto;
-      display: flex;
-      flex-direction: column;
-    }
-    #secretContent button {
-      font-size: 16px;
-      margin-top: 16px;
-      padding: 10px 20px;
-    }
-    #closeBtn {
-      margin-top: auto;
-      align-self: flex-end;
-      background: #1a73e8;
-      color: white;
-    }
-    footer {
-      font-size: 14px;
-      color: #70757a;
-      padding: 14px 24px;
-      background: #f2f2f2;
-      border-top: 1px solid #e4e4e4;
-      position: fixed;
-      bottom: 0;
-      width: 100%;
-      display: flex;
-      justify-content: space-between;
-    }
-    footer a {
-      color: #70757a;
-      text-decoration: none;
-      margin: 0 12px;
-    }
-  </style>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Google</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    margin:0; padding:0; background: #fff;
+  }
+  header, footer {
+    padding: 10px 20px;
+    font-size: 14px;
+    color: #555;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+  }
+  header a, footer a {
+    color: #555;
+    text-decoration: none;
+  }
+  header a:hover, footer a:hover {
+    text-decoration: underline;
+  }
+  main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 150px;
+  }
+  img {
+    width: 272px;
+    height: 92px;
+  }
+  form {
+    margin-top: 20px;
+  }
+  input[type=text] {
+    width: 500px;
+    height: 40px;
+    font-size: 18px;
+    padding: 0 12px;
+    border: 1px solid #dfe1e5;
+    border-radius: 24px;
+    box-shadow: none;
+    outline: none;
+  }
+  input[type=text]:focus {
+    border-color: #4285f4;
+    box-shadow: 0 0 5px #4285f4;
+  }
+  .buttons {
+    margin-top: 30px;
+  }
+  .buttons button {
+    background-color: #f8f9fa;
+    border: 1px solid #f8f9fa;
+    border-radius: 4px;
+    color: #3c4043;
+    font-size: 14px;
+    margin: 11px 6px 0 6px;
+    padding: 10px 16px;
+    cursor: pointer;
+  }
+  .buttons button:hover {
+    border: 1px solid #c6c6c6;
+    box-shadow: 0 1px 1px rgb(0 0 0 / 0.1);
+  }
+  /* ログインフォームスタイル */
+  #loginForm {
+    margin-top: 30px;
+    display: none;
+    text-align: center;
+  }
+  #loginForm input[type=text], #loginForm input[type=password] {
+    width: 280px;
+    padding: 8px;
+    margin: 6px 0;
+    font-size: 16px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+  }
+  #loginForm button {
+    margin-top: 10px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 4px;
+    border: none;
+    background-color: #1a73e8;
+    color: white;
+  }
+  /* ログイン成功後のボタン */
+  #afterLogin {
+    margin-top: 20px;
+    display: none;
+    text-align: center;
+  }
+  #afterLogin button {
+    margin: 5px;
+    padding: 10px 16px;
+    font-size: 14px;
+    cursor: pointer;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    background-color: #f8f9fa;
+  }
+  #afterLogin button:hover {
+    background-color: #e8e8e8;
+  }
+  /* iframe 埋め込み */
+  #embedContainer {
+    margin-top: 30px;
+    display: none;
+    width: 100%;
+    height: 600px;
+    border: none;
+  }
+  #embedIframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+  }
+</style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
 </head>
 <body>
-  <!-- 上部ナビ -->
-  <nav class="top-nav">
-    <div class="nav-left">
-      <a href="https://about.google/?fg=1" target="_blank">Googleについて</a>
-      <a href="https://store.google.com/" target="_blank">ストア</a>
-    </div>
-    <div class="nav-right">
-      <a href="https://mail.google.com/" target="_blank">Gmail</a>
-      <a href="https://www.google.com/imghp" target="_blank">画像</a>
-      <a href="https://accounts.google.com/ServiceLogin" target="_blank">ログイン</a>
-      <img class="app-icon" src="https://www.gstatic.com/images/branding/product/1x/googleg_32dp.png" alt="Google Apps" />
-    </div>
-  </nav>
 
-  <!-- ロゴ -->
-  <div class="logo">
-    <img src="https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png" alt="Google" />
-  </div>
+<header>
+  <a href="#">Gmail</a>
+  <a href="#">画像</a>
+  <a href="#">ログイン</a>
+</header>
 
-  <!-- 検索 -->
-  <form id="searchForm" class="search-box">
-    <div class="search-container">
-      <input type="text" id="query" name="q" placeholder="Google 検索" autocomplete="off" required />
-      <div class="search-icons">
-        <img src="https://www.gstatic.com/images/icons/material/system/1x/photo_camera_grey600_24dp.png" alt="画像で検索" onclick="window.open('https://www.google.com/imghp', '_blank')" />
-        <img src="https://www.gstatic.com/images/icons/material/system/1x/mic_grey600_24dp.png" alt="音声検索" onclick="window.open('https://www.google.com/search?q=音声検索', '_blank')" />
-      </div>
-    </div>
-    <div class="buttons">
-      <input type="submit" value="Google 検索" />
-      <input type="button" value="I'm Feeling Lucky" onclick="window.location.href='https://www.google.com/doodles';" />
-    </div>
+<main>
+  <img src="https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png" alt="Google" />
+
+  <form id="searchForm" onsubmit="return false;">
+    <input type="text" id="searchInput" autocomplete="off" placeholder="Google 検索または URL を入力" oninput="onInputChange()" />
   </form>
 
-  <!-- 秘密ページモーダル -->
-  <div id="secretModal">
-    <div id="secretContent">
-      <h2>成功！</h2>
-      <p>チャット定期的に入って～</p>
-      <p>
-        <button type="button" onclick="location.href='https://chat-u5k5.onrender.com/'">6年だけチャット！</button>
-        <button type="button" onclick="location.href='https://offcha.com/room/dlKme6WVrCcoPyyoanrT'">避難用チャット（6年だけ）</button>
-        <button type="button" onclick="location.href='https://thickofit.moldeo.org/'">Interstellarプロキシ（広告多め）</button>
-        <button type="button" onclick="location.href='https://light.6nenn.patrickwrede.com/'">自作Interstellarプロキシ（広告多め）</button>
-        <button type="button" onclick="location.href='https://benkyou.ycare.org/'">自作shadowプロキシ</button>
-        <button type="button" onclick="location.href='https://solar.bomberfish.ca/'">solarOS（太陽プロキシ）</button>
-
-      </p>
-      <button id="closeBtn">閉じる</button>
-    </div>
+  <div class="buttons">
+    <button onclick="doSearch()">Google 検索</button>
+    <button onclick="doLucky()">I'm Feeling Lucky</button>
   </div>
 
-  <!-- フッター -->
-  <footer>
-    <div class="left-links">
-      <a href="https://ads.google.com/intl/ja_jp/home/" target="_blank">広告</a>
-      <a href="https://business.google.com/" target="_blank">ビジネス</a>
-      <a href="https://www.google.com/search/howsearchworks/" target="_blank">検索の仕組み</a>
-    </div>
-    <div class="right-links">
-      <a href="https://policies.google.com/privacy" target="_blank">プライバシー</a>
-      <a href="https://policies.google.com/terms" target="_blank">規約</a>
-      <a href="#" onclick="alert('設定はまだ実装されていません')">設定</a>
-    </div>
-  </footer>
+  <!-- ログインフォーム -->
+  <div id="loginForm">
+    <h3>管理者ログイン</h3>
+    <input type="text" id="username" placeholder="ユーザー名" /><br />
+    <input type="password" id="password" placeholder="パスワード" /><br />
+    <button onclick="login()">ログイン</button>
+  </div>
 
-  <!-- スクリプト -->
-  <script>
-    const form = document.getElementById('searchForm');
-    const modal = document.getElementById('secretModal');
-    const closeBtn = document.getElementById('closeBtn');
+  <!-- ログイン成功後 -->
+  <div id="afterLogin">
+    <h3>ログイン成功！下のボタンをクリックしてください</h3>
+    <button onclick="showSite('https://example.com')">サイト1</button>
+    <button onclick="showSite('https://www.google.com/preferences?hl=ja&fg=1')">設定</button>
+  </div>
 
-    form.addEventListener('submit', function (e) {
-      e.preventDefault();
-      const query = document.getElementById('query').value.trim();
-      if (query.toLowerCase() === 'roguinn78') {
-        modal.style.display = 'flex';
-      } else {
-        window.location.href = 'https://www.google.com/search?q=' + encodeURIComponent(query);
-      }
-    });
+  <!-- iframe表示 -->
+  <div id="embedContainer">
+    <iframe id="embedIframe" src=""></iframe>
+  </div>
 
-    closeBtn.addEventListener('click', function () {
-      modal.style.display = 'none';
-    });
-  </script>
+</main>
+
+<footer>
+  <a href="#">日本</a>
+  <a href="#">広告</a>
+  <a href="#">ビジネス</a>
+  <a href="#">検索の仕組み</a>
+  <a href="#">プライバシー</a>
+  <a href="#">規約</a>
+  <a href="https://www.google.com/preferences?hl=ja&fg=1" target="_blank" rel="noopener noreferrer">設定</a>
+</footer>
+
+<script>
+  // 入力監視
+  function onInputChange() {
+    const val = document.getElementById("searchInput").value.toLowerCase();
+    // 「roguinn」と入力したらログインフォームを表示
+    if(val.includes("roguinn")) {
+      document.getElementById("loginForm").style.display = "block";
+    } else {
+      document.getElementById("loginForm").style.display = "none";
+      document.getElementById("afterLogin").style.display = "none";
+      document.getElementById("embedContainer").style.display = "none";
+      document.getElementById("embedIframe").src = "";
+    }
+  }
+
+  function doSearch() {
+    // 普通のGoogle検索風に遷移（実際はgoogle.comに飛ばす）
+    const query = encodeURIComponent(document.getElementById("searchInput").value);
+    if(query.trim() === "") return;
+    window.location.href = "https://www.google.com/search?q=" + query;
+  }
+
+  function doLucky() {
+    const query = encodeURIComponent(document.getElementById("searchInput").value);
+    if(query.trim() === "") return;
+    window.location.href = "https://www.google.com/search?q=" + query + "&btnI=I";
+  }
+
+  // ログイン処理
+  function login() {
+    const username = toHalfWidth(document.getElementById("username").value.trim());
+    const password = toHalfWidth(document.getElementById("password").value.trim());
+    const userHash = CryptoJS.SHA256(username).toString();
+    const passHash = CryptoJS.SHA256(password).toString();
+
+    // 管理者ユーザー名とパスワードのハッシュ
+    const validUserHash = CryptoJS.SHA256("y").toString();
+    const validPassHash = CryptoJS.SHA256("pcb7767").toString();
+
+    if(userHash === validUserHash && passHash === validPassHash) {
+      alert("ログイン成功！");
+      document.getElementById("loginForm").style.display = "none";
+      document.getElementById("afterLogin").style.display = "block";
+      // 検索バーも非表示にしてすっきり
+      document.getElementById("searchInput").style.display = "none";
+      document.querySelector(".buttons").style.display = "none";
+    } else {
+      alert("ユーザー名かパスワードが違います。");
+    }
+  }
+
+  function toHalfWidth(str) {
+    return str.replace(/[！-～]/g, function(ch) {
+      return String.fromCharCode(ch.charCodeAt(0) - 0xFEE0);
+    }).replace(/　/g, " ");
+  }
+
+  // 埋め込み表示する関数
+  function showSite(url) {
+    const iframe = document.getElementById("embedIframe");
+    iframe.src = url;
+    document.getElementById("embedContainer").style.display = "block";
+    iframe.scrollIntoView({behavior:"smooth"});
+  }
+</script>
+
 </body>
 </html>
