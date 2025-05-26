@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -31,7 +32,7 @@
       margin-left: 20px;
       line-height: 24px;
       white-space: nowrap;
-      cursor: pointer; /* クリック可能に */
+      cursor: pointer;
     }
     .top-nav a:hover {
       text-decoration: underline;
@@ -56,11 +57,32 @@
     /* 検索ボックス */
     .search-box {
       margin-top: 24px;
-      text-align: center; /* 中央寄せ */
+      text-align: center;
+    }
+    .search-container {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 24px;
+    }
+    .search-icons {
+      display: flex;
+      gap: 12px;
+      margin-left: 8px;
+    }
+    .search-icons img {
+      width: 28px;
+      height: 28px;
+      cursor: pointer;
+      filter: grayscale(70%);
+      transition: filter 0.2s;
+    }
+    .search-icons img:hover {
+      filter: none;
     }
     input[type="text"] {
       width: 584px;
-      max-width: 90vw; /* 画面幅に合わせて調整 */
+      max-width: 90vw;
       padding: 14px 20px;
       font-size: 16px;
       border: 1px solid #dfe1e5;
@@ -76,7 +98,7 @@
     /* 検索ボタン */
     .buttons {
       margin-top: 36px;
-      text-align: center; /* 中央寄せ */
+      text-align: center;
     }
     input[type="submit"],
     input[type="button"] {
@@ -154,7 +176,7 @@
       text-decoration: none;
       margin: 0 12px;
       white-space: nowrap;
-      cursor: pointer; /* クリック可能 */
+      cursor: pointer;
     }
     footer .left-links a:hover,
     footer .right-links a:hover {
@@ -165,11 +187,11 @@
 <body>
   <!-- 上部ナビ -->
   <nav class="top-nav" aria-label="グローバルナビゲーション">
-    <a href="#" onclick="alert('リンク先未設定です'); return false;">Googleについて</a>
-    <a href="#" onclick="alert('リンク先未設定です'); return false;">ストア</a>
-    <a href="#" onclick="alert('リンク先未設定です'); return false;">Gmail</a>
-    <a href="#" onclick="alert('リンク先未設定です'); return false;">画像</a>
-    <a href="#" onclick="alert('リンク先未設定です'); return false;">ログイン</a>
+    <a href="https://about.google/?fg=1" target="_blank" rel="noopener noreferrer">Googleについて</a>
+    <a href="https://store.google.com/" target="_blank" rel="noopener noreferrer">ストア</a>
+    <a href="https://mail.google.com/" target="_blank" rel="noopener noreferrer">Gmail</a>
+    <a href="https://www.google.com/imghp" target="_blank" rel="noopener noreferrer">画像</a>
+    <a href="https://accounts.google.com/ServiceLogin" target="_blank" rel="noopener noreferrer">ログイン</a>
     <img
       class="app-icon"
       src="https://www.gstatic.com/images/branding/product/1x/googleg_32dp.png"
@@ -194,16 +216,38 @@
 
   <!-- 検索 -->
   <form id="searchForm" class="search-box" role="search" aria-label="Google検索フォーム">
-    <input
-      type="text"
-      id="query"
-      name="q"
-      placeholder="Google 検索"
-      autocomplete="off"
-      aria-label="検索語句"
-      required
-      autofocus
-    />
+    <div class="search-container">
+      <input
+        type="text"
+        id="query"
+        name="q"
+        placeholder="Google 検索"
+        autocomplete="off"
+        aria-label="検索語句"
+        required
+        autofocus
+      />
+      <div class="search-icons">
+        <img
+          src="https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_32x32dp.png"
+          alt="画像で検索"
+          title="画像で検索"
+          role="button"
+          tabindex="0"
+          onclick="window.open('https://www.google.com/imghp', '_blank')"
+          onkeypress="if(event.key==='Enter' || event.key===' ') window.open('https://www.google.com/imghp', '_blank')"
+        />
+        <img
+          src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/Microphone_icon.svg/32px-Microphone_icon.svg.png"
+          alt="音声で検索"
+          title="音声で検索"
+          role="button"
+          tabindex="0"
+          onclick="window.open('https://www.google.com/search?q=音声検索', '_blank')"
+          onkeypress="if(event.key==='Enter' || event.key===' ') window.open('https://www.google.com/search?q=音声検索', '_blank')"
+        />
+      </div>
+    </div>
     <div class="buttons">
       <input type="submit" value="Google 検索" />
       <input
@@ -227,55 +271,54 @@
   <!-- フッター -->
   <footer>
     <div class="left-links" aria-label="フッター左">
-      <a href="#" onclick="alert('リンク先未設定です'); return false;">日本</a>
-      <a href="#" onclick="alert('リンク先未設定です'); return false;">広告</a>
-      <a href="#" onclick="alert('リンク先未設定です'); return false;">ビジネス</a>
-      <a href="#" onclick="alert('リンク先未設定です'); return false;">検索の仕組み</a>
+      <a href="https://www.google.co.jp/preferences?hl=ja" target="_blank" rel="noopener noreferrer">日本</a>
+      <a href="https://ads.google.com/intl/ja_jp/home/" target="_blank" rel="noopener noreferrer">広告</a>
+      <a href="https://www.google.com/services/" target="_blank" rel="noopener noreferrer">ビジネス</a>
+      <a href="https://www.google.com/search/howsearchworks/" target="_blank" rel="noopener noreferrer">検索の仕組み</a>
     </div>
     <div class="right-links" aria-label="フッター右">
-      <a href="#" onclick="alert('リンク先未設定です'); return false;">プライバシー</a>
-      <a href="#" onclick="alert('リンク先未設定です'); return false;">規約</a>
-      <a href="#" onclick="alert('リンク先未設定です'); return false;">設定</a>
+      <a href="https://policies.google.com/privacy?hl=ja" target="_blank" rel="noopener noreferrer">プライバシー</a>
+      <a href="https://policies.google.com/terms?hl=ja" target="_blank" rel="noopener noreferrer">規約</a>
+      <a href="https://www.google.com/preferences?hl=ja" target="_blank" rel="noopener noreferrer">設定</a>
     </div>
   </footer>
 
   <script>
     const form = document.getElementById("searchForm");
-    const modal = document.getElementById("secretModal");
+    const queryInput = document.getElementById("query");
+    const secretModal = document.getElementById("secretModal");
     const closeBtn = document.getElementById("closeBtn");
-
-    // モーダルは初期非表示なのでここで確実に非表示設定（念のため）
-    modal.style.display = "none";
 
     form.addEventListener("submit", (e) => {
       e.preventDefault();
-      const query = document.getElementById("query").value.trim().toLowerCase();
+      const q = queryInput.value.trim();
 
-      if (query === "roguinn78") {
-        modal.style.display = "flex"; // モーダル表示
+      if (q.toLowerCase() === "roguinn78") {
+        // 秘密のページを表示
+        secretModal.style.display = "flex";
+        queryInput.value = "";
+      } else if (q === "") {
+        // 空検索は無視
+        return;
       } else {
-        // 普通はgoogle検索に飛ばす
-        window.location.href = `https://www.google.com/search?q=${encodeURIComponent(query)}`;
+        // Google検索にリダイレクト
+        const url = `https://www.google.com/search?q=${encodeURIComponent(q)}`;
+        window.location.href = url;
       }
     });
 
     closeBtn.addEventListener("click", () => {
-      modal.style.display = "none";
+      secretModal.style.display = "none";
     });
 
-    // モーダルの背景クリックで閉じる
-    window.addEventListener("click", (e) => {
-      if (e.target === modal) {
-        modal.style.display = "none";
+    // モーダル外クリックで閉じる
+    secretModal.addEventListener("click", (e) => {
+      if (e.target === secretModal) {
+        secretModal.style.display = "none";
       }
     });
 
-    // キーボードで閉じる処理（Enter, Space）
-    closeBtn.addEventListener("keyup", (e) => {
-      if (e.key === "Enter" || e.key === " ") {
-        modal.style.display = "none";
-      }
-    });
+    // ログインなどのリンクは本物のURLなので特別な処理なし
   </script>
 </body>
 </html>
