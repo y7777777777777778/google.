@@ -69,63 +69,19 @@
     border: 1px solid #c6c6c6;
     box-shadow: 0 1px 1px rgb(0 0 0 / 0.1);
   }
-  /* ログインフォームスタイル */
-  #loginForm {
-    margin-top: 30px;
+  #hiddenPage {
     display: none;
-    text-align: center;
-  }
-  #loginForm input[type=text], #loginForm input[type=password] {
-    width: 280px;
-    padding: 8px;
-    margin: 6px 0;
+    margin-top: 40px;
+    max-width: 600px;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    color: #222;
     font-size: 16px;
-    border-radius: 4px;
-    border: 1px solid #ccc;
-  }
-  #loginForm button {
-    margin-top: 10px;
-    padding: 10px 20px;
-    font-size: 16px;
-    cursor: pointer;
-    border-radius: 4px;
-    border: none;
-    background-color: #1a73e8;
-    color: white;
-  }
-  /* ログイン成功後のボタン */
-  #afterLogin {
-    margin-top: 20px;
-    display: none;
-    text-align: center;
-  }
-  #afterLogin button {
-    margin: 5px;
-    padding: 10px 16px;
-    font-size: 14px;
-    cursor: pointer;
-    border-radius: 4px;
-    border: 1px solid #ccc;
-    background-color: #f8f9fa;
-  }
-  #afterLogin button:hover {
-    background-color: #e8e8e8;
-  }
-  /* iframe 埋め込み */
-  #embedContainer {
-    margin-top: 30px;
-    display: none;
-    width: 100%;
-    height: 600px;
-    border: none;
-  }
-  #embedIframe {
-    width: 100%;
-    height: 100%;
-    border: none;
+    line-height: 1.5;
   }
 </style>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
 </head>
 <body>
 
@@ -138,35 +94,21 @@
 <main>
   <img src="https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png" alt="Google" />
 
-  <form id="searchForm" onsubmit="return false;">
-    <input type="text" id="searchInput" autocomplete="off" placeholder="Google 検索または URL を入力" oninput="onInputChange()" />
+  <form id="searchForm" onsubmit="return handleSearch(event);">
+    <input type="text" id="searchInput" autocomplete="off" placeholder="Google 検索または URL を入力" />
   </form>
 
   <div class="buttons">
-    <button onclick="doSearch()">Google 検索</button>
-    <button onclick="doLucky()">I'm Feeling Lucky</button>
+    <button onclick="handleSearch()">Google 検索</button>
+    <button onclick="handleLucky()">I'm Feeling Lucky</button>
   </div>
 
-  <!-- ログインフォーム -->
-  <div id="loginForm">
-    <h3>管理者ログイン</h3>
-    <input type="text" id="username" placeholder="ユーザー名" /><br />
-    <input type="password" id="password" placeholder="パスワード" /><br />
-    <button onclick="login()">ログイン</button>
+  <div id="hiddenPage">
+    <h2>秘密の隠しページへようこそ！</h2>
+    <p>これは <strong>roguinn78</strong> の入力時だけ表示される隠しページです。</p>
+    <p>好きなコンテンツをここに入れてください。</p>
+    <button onclick="hideHiddenPage()">隠しページを閉じる</button>
   </div>
-
-  <!-- ログイン成功後 -->
-  <div id="afterLogin">
-    <h3>ログイン成功！下のボタンをクリックしてください</h3>
-    <button onclick="showSite('https://example.com')">サイト1</button>
-    <button onclick="showSite('https://www.google.com/preferences?hl=ja&fg=1')">設定</button>
-  </div>
-
-  <!-- iframe表示 -->
-  <div id="embedContainer">
-    <iframe id="embedIframe" src=""></iframe>
-  </div>
-
 </main>
 
 <footer>
@@ -180,68 +122,37 @@
 </footer>
 
 <script>
-  // 入力監視
-  function onInputChange() {
-    const val = document.getElementById("searchInput").value.toLowerCase();
-    // 「roguinn」と入力したらログインフォームを表示
-    if(val.includes("roguinn")) {
-      document.getElementById("loginForm").style.display = "block";
-    } else {
-      document.getElementById("loginForm").style.display = "none";
-      document.getElementById("afterLogin").style.display = "none";
-      document.getElementById("embedContainer").style.display = "none";
-      document.getElementById("embedIframe").src = "";
+  function handleSearch(event) {
+    if(event) event.preventDefault();
+    const input = document.getElementById("searchInput");
+    const query = input.value.trim();
+
+    if(query.toLowerCase() === "roguinn78") {
+      // 隠しページ表示
+      document.getElementById("hiddenPage").style.display = "block";
+      // メイン検索UIは隠さないが検索欄は空にしておく
+      input.value = "";
+    } else if(query !== "") {
+      // 普通にGoogle検索へリダイレクト
+      window.location.href = "https://www.google.com/search?q=" + encodeURIComponent(query);
+    }
+    return false;
+  }
+
+  function handleLucky() {
+    const input = document.getElementById("searchInput");
+    const query = input.value.trim();
+
+    if(query.toLowerCase() === "roguinn78") {
+      document.getElementById("hiddenPage").style.display = "block";
+      input.value = "";
+    } else if(query !== "") {
+      window.location.href = "https://www.google.com/search?q=" + encodeURIComponent(query) + "&btnI=I";
     }
   }
 
-  function doSearch() {
-    // 普通のGoogle検索風に遷移（実際はgoogle.comに飛ばす）
-    const query = encodeURIComponent(document.getElementById("searchInput").value);
-    if(query.trim() === "") return;
-    window.location.href = "https://www.google.com/search?q=" + query;
-  }
-
-  function doLucky() {
-    const query = encodeURIComponent(document.getElementById("searchInput").value);
-    if(query.trim() === "") return;
-    window.location.href = "https://www.google.com/search?q=" + query + "&btnI=I";
-  }
-
-  // ログイン処理
-  function login() {
-    const username = toHalfWidth(document.getElementById("username").value.trim());
-    const password = toHalfWidth(document.getElementById("password").value.trim());
-    const userHash = CryptoJS.SHA256(username).toString();
-    const passHash = CryptoJS.SHA256(password).toString();
-
-    // 管理者ユーザー名とパスワードのハッシュ
-    const validUserHash = CryptoJS.SHA256("y").toString();
-    const validPassHash = CryptoJS.SHA256("pcb7767").toString();
-
-    if(userHash === validUserHash && passHash === validPassHash) {
-      alert("ログイン成功！");
-      document.getElementById("loginForm").style.display = "none";
-      document.getElementById("afterLogin").style.display = "block";
-      // 検索バーも非表示にしてすっきり
-      document.getElementById("searchInput").style.display = "none";
-      document.querySelector(".buttons").style.display = "none";
-    } else {
-      alert("ユーザー名かパスワードが違います。");
-    }
-  }
-
-  function toHalfWidth(str) {
-    return str.replace(/[！-～]/g, function(ch) {
-      return String.fromCharCode(ch.charCodeAt(0) - 0xFEE0);
-    }).replace(/　/g, " ");
-  }
-
-  // 埋め込み表示する関数
-  function showSite(url) {
-    const iframe = document.getElementById("embedIframe");
-    iframe.src = url;
-    document.getElementById("embedContainer").style.display = "block";
-    iframe.scrollIntoView({behavior:"smooth"});
+  function hideHiddenPage() {
+    document.getElementById("hiddenPage").style.display = "none";
   }
 </script>
 
