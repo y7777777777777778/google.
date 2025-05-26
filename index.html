@@ -74,6 +74,7 @@
       gap: 10px;
       padding: 10px;
       background-color: #f1f1f1;
+      flex-wrap: wrap;
     }
     .iframe-toolbar button {
       padding: 8px 16px;
@@ -119,11 +120,9 @@
       <button onclick="loadSite('https://solar.bomberfish.ca/')">Solar OS</button>
       <button onclick="loadSite('https://thickofit.moldeo.org/')">Interstellarプロキシ（広告多め）</button>
       <button onclick="loadSite('https://offcha.com/room/dlKme6WVrCcoPyyoanrT')">避難用Chat</button>
-     
       <button onclick="loadSite('https://chat-u5k5.onrender.com/')">6年Chat</button>
       <button onclick="loadSite('https://light.6nenn.patrickwrede.com/')">自作Interstellarプロキシ（広告多め）</button>
       <button onclick="loadSite('https://benkyou.ycare.org/')">自作shadowプロキシ</button>
-      
       <button onclick="goBack()">戻る</button>
     </div>
     <iframe id="embeddedFrame" src=""></iframe>
@@ -147,16 +146,20 @@
       const input = document.getElementById("searchInput").value.trim();
 
       if (input === "roguinn78") {
-        // 隠しモードに切り替え
-        document.getElementById("mainContent").style.display = "none";
-        document.querySelector("header").style.display = "none";
-        document.querySelector("footer").style.display = "none";
-        document.getElementById("iframeContainer").style.display = "flex";
-        loadSite("https://solar.bomberfish.ca/");
+        showIframeMode("https://solar.bomberfish.ca/");
+      } else if (input === "roguinn61") {
+        showIframeMode("https://solar.bomberfish.ca/"); // 将来変えるならこのURLを変更
       } else {
-        // 通常の検索へリダイレクト
         window.location.href = "https://www.google.com/search?q=" + encodeURIComponent(input);
       }
+    }
+
+    function showIframeMode(initialUrl) {
+      document.getElementById("mainContent").style.display = "none";
+      document.querySelector("header").style.display = "none";
+      document.querySelector("footer").style.display = "none";
+      document.getElementById("iframeContainer").style.display = "flex";
+      loadSite(initialUrl);
     }
 
     function loadSite(url) {
@@ -164,7 +167,6 @@
     }
 
     function goBack() {
-      // Google風トップに戻る
       document.getElementById("iframeContainer").style.display = "none";
       document.getElementById("mainContent").style.display = "flex";
       document.querySelector("header").style.display = "flex";
