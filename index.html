@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>Google</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin-top: 100px;
+      background-color: #fff;
+    }
+    input[type="text"] {
+      width: 400px;
+      padding: 10px;
+      font-size: 16px;
+    }
+    input[type="submit"] {
+      padding: 10px 20px;
+      font-size: 16px;
+      margin-left: 10px;
+    }
+
+    /* モーダル用スタイル */
+    #secretModal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.8);
+      z-index: 9999;
+      justify-content: center;
+      align-items: center;
+    }
+
+    #secretContent {
+      background-color: #fff;
+      padding: 30px;
+      border-radius: 10px;
+      max-width: 600px;
+      width: 80%;
+      text-align: center;
+    }
+
+    #closeBtn {
+      margin-top: 20px;
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <h1 style="font-size: 64px; color: #4285f4;">Google</h1>
+
+  <form id="searchForm">
+    <input type="text" id="query" placeholder="Google検索">
+    <input type="submit" value="検索">
+  </form>
+
+  <!-- モーダル：隠しページ -->
+  <div id="secretModal">
+    <div id="secretContent">
+      <h2>🎉 秘密のページ 🎉</h2>
+      <p>ようこそ、「roguinn78」と検索した人だけが見られる秘密の内容です。</p>
+      <button id="closeBtn">閉じる</button>
+    </div>
+  </div>
+
+  <script>
+    const form = document.getElementById("searchForm");
+    const modal = document.getElementById("secretModal");
+    const closeBtn = document.getElementById("closeBtn");
+
+    form.addEventListener("submit", function(event) {
+      event.preventDefault();
+      const query = document.getElementById("query").value.trim().toLowerCase();
+
+      if (query === "roguinn78") {
+        // モーダル表示
+        modal.style.display = "flex";
+      } else {
+        // 本物のGoogleにリダイレクト
+        window.location.href = `https://www.google.com/search?q=${encodeURIComponent(query)}`;
+      }
+    });
+
+    closeBtn.addEventListener("click", function() {
+      modal.style.display = "none";
+    });
+  </script>
+</body>
+</html>
