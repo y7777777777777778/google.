@@ -257,10 +257,16 @@
     <div id="secretContent">
       <h2>🎉 秘密のページ 🎉</h2>
       <p>これは「roguinn78」と検索した人だけが見られる隠しページです。</p>
+      
       <p>
         <button id="showUrlBtn">このサイトのURLを表示</button>
       </p>
       <p id="siteUrlText" style="margin-top: 8px; color: #1a73e8;"></p>
+      
+      <p>
+        <button id="goToSiteBtn">🔗 指定サイトを開く</button>
+      </p>
+
       <button id="closeBtn">閉じる</button>
     </div>
   </div>
@@ -268,19 +274,17 @@
   <!-- フッター -->
   <footer>
     <div class="left-links">
-      <a href="https://www.google.co.jp/preferences?hl=ja" target="_blank">日本</a>
-      <a href="https://ads.google.com/intl/ja_jp/home/" target="_blank">広告</a>
+      <a href="https://www.google.co.jp/intl/ja_jp/ads/" target="_blank">広告</a>
       <a href="https://www.google.com/services/" target="_blank">ビジネス</a>
       <a href="https://www.google.com/search/howsearchworks/" target="_blank">検索の仕組み</a>
     </div>
     <div class="right-links">
-      <a href="https://policies.google.com/privacy?hl=ja" target="_blank">プライバシー</a>
-      <a href="https://policies.google.com/terms?hl=ja" target="_blank">規約</a>
-      <a href="https://www.google.com/preferences?hl=ja" target="_blank">設定</a>
+      <a href="https://policies.google.com/privacy" target="_blank">プライバシー</a>
+      <a href="https://policies.google.com/terms" target="_blank">規約</a>
+      <a href="https://www.google.com/preferences" target="_blank">設定</a>
     </div>
   </footer>
 
-  <!-- スクリプト -->
   <script>
     const form = document.getElementById("searchForm");
     const queryInput = document.getElementById("query");
@@ -288,34 +292,34 @@
     const closeBtn = document.getElementById("closeBtn");
     const showUrlBtn = document.getElementById("showUrlBtn");
     const siteUrlText = document.getElementById("siteUrlText");
+    const goToSiteBtn = document.getElementById("goToSiteBtn");
 
     form.addEventListener("submit", (e) => {
       e.preventDefault();
-      const q = queryInput.value.trim();
-      if (q.toLowerCase() === "roguinn78") {
+      const query = queryInput.value.trim();
+      if (query.toLowerCase() === "roguinn78") {
+        // 隠しページ表示
         secretModal.style.display = "flex";
-        queryInput.value = "";
-      } else if (q) {
-        window.location.href = `https://www.google.com/search?q=${encodeURIComponent(q)}`;
+        siteUrlText.textContent = "";
+      } else {
+        // 普通の検索 → Google検索ページに遷移（同じタブ）
+        const encodedQuery = encodeURIComponent(query);
+        window.location.href = `https://www.google.com/search?q=${encodedQuery}`;
       }
     });
 
     closeBtn.addEventListener("click", () => {
       secretModal.style.display = "none";
-    });
-
-    secretModal.addEventListener("click", (e) => {
-      if (e.target === secretModal) {
-        secretModal.style.display = "none";
-      }
+      queryInput.value = "";
+      queryInput.focus();
     });
 
     showUrlBtn.addEventListener("click", () => {
-      const url = window.location.href;
-      siteUrlText.innerHTML = `このサイトのURL: <a href="${url}" target="_blank">${url}</a>`;
-      navigator.clipboard.writeText(url).then(() => {
-        console.log("URL copied to clipboard");
-      });
+      siteUrlText.textContent = "https://example.com"; // 表示したいURL
+    });
+
+    goToSiteBtn.addEventListener("click", () => {
+      window.location.href = "https://example.com"; // ここを任意のURLに変えてください
     });
   </script>
 </body>
