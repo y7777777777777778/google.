@@ -1,31 +1,40 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>Google</title>
-  <link rel="icon" href="https://www.google.com/favicon.ico">
+  <link rel="icon" href="https://www.google.com/favicon.ico" />
   <style>
-    body {
-      margin: 0;
-      padding: 0;
-      font-family: Arial, sans-serif;
-      background-color: #fff;
-      text-align: center;
+    /* Reset */
+    * {
+      box-sizing: border-box;
     }
 
-    /* 上部メニュー */
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #fff;
+      color: #202124;
+      user-select: none;
+    }
+
+    /* 上部ナビゲーション */
     .top-nav {
       display: flex;
       justify-content: flex-end;
       align-items: center;
-      padding: 10px 20px;
+      padding: 12px 24px;
       font-size: 14px;
+      color: #5f6368;
+      background: #fff;
     }
 
     .top-nav a {
-      margin-left: 15px;
-      color: #202124;
+      color: #5f6368;
       text-decoration: none;
+      margin-left: 20px;
+      line-height: 24px;
+      white-space: nowrap;
     }
 
     .top-nav a:hover {
@@ -33,143 +42,214 @@
     }
 
     .app-icon {
-      width: 24px;
-      height: 24px;
-      margin-left: 15px;
+      margin-left: 20px;
       cursor: pointer;
+      width: 32px;
+      height: 32px;
+      filter: grayscale(100%);
+      transition: filter 0.3s;
+    }
+
+    .app-icon:hover {
+      filter: grayscale(0%);
     }
 
     /* ロゴ */
     .logo {
-      margin-top: 100px;
-    }
-
-    .logo img {
+      margin: 120px auto 0;
       width: 272px;
       height: 92px;
     }
 
-    /* 検索 */
+    /* 検索ボックス */
     .search-box {
-      margin-top: 20px;
+      margin-top: 24px;
     }
 
     input[type="text"] {
-      width: 580px;
+      width: 584px;
       padding: 14px 20px;
       font-size: 16px;
       border: 1px solid #dfe1e5;
       border-radius: 24px;
       outline: none;
+      box-shadow: none;
+      transition: box-shadow 0.2s;
     }
 
-    input[type="submit"], input[type="button"] {
-      margin-top: 30px;
-      padding: 10px 20px;
-      font-size: 14px;
-      border: none;
-      border-radius: 4px;
+    input[type="text"]:focus {
+      box-shadow: 0 0 5px #4285f4;
+      border-color: #4285f4;
+    }
+
+    /* 検索ボタン */
+    .buttons {
+      margin-top: 36px;
+    }
+
+    input[type="submit"],
+    input[type="button"] {
       background-color: #f8f9fa;
+      border: 1px solid #f8f9fa;
+      border-radius: 4px;
       color: #3c4043;
+      font-size: 14px;
+      padding: 10px 20px;
+      margin: 0 6px;
       cursor: pointer;
-      margin-right: 10px;
+      user-select: none;
+      transition: background-color 0.2s, box-shadow 0.2s, border-color 0.2s;
     }
 
-    input[type="submit"]:hover, input[type="button"]:hover {
+    input[type="submit"]:hover,
+    input[type="button"]:hover {
       border: 1px solid #dadce0;
-      box-shadow: 0 1px 1px rgba(0,0,0,.1);
+      box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+      background-color: #f8f9fa;
+      color: #202124;
     }
 
     /* モーダル */
     #secretModal {
       display: none;
       position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
+      inset: 0;
       background-color: rgba(0, 0, 0, 0.8);
       z-index: 9999;
+      display: flex;
       justify-content: center;
       align-items: center;
     }
 
     #secretContent {
-      background-color: #fff;
-      padding: 30px;
-      border-radius: 10px;
+      background: white;
+      padding: 30px 40px;
+      border-radius: 8px;
       max-width: 600px;
       width: 90%;
       text-align: center;
+      font-size: 18px;
+      color: #202124;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
     }
 
     #closeBtn {
-      margin-top: 20px;
-      padding: 10px 20px;
+      margin-top: 24px;
+      padding: 10px 24px;
       font-size: 16px;
+      border: none;
+      background-color: #1a73e8;
+      color: white;
+      border-radius: 4px;
       cursor: pointer;
+      user-select: none;
+      transition: background-color 0.2s;
+    }
+
+    #closeBtn:hover {
+      background-color: #155ab6;
     }
 
     /* フッター */
     footer {
+      font-size: 14px;
+      color: #70757a;
+      padding: 14px 24px;
+      background: #f2f2f2;
+      border-top: 1px solid #e4e4e4;
       position: fixed;
       bottom: 0;
       width: 100%;
-      font-size: 14px;
-      background-color: #f2f2f2;
-      border-top: 1px solid #e4e4e4;
-      padding: 10px 20px;
       display: flex;
       justify-content: space-between;
-      color: #70757a;
+      user-select: none;
     }
 
-    footer a {
+    footer .left-links a,
+    footer .right-links a {
       color: #70757a;
       text-decoration: none;
-      margin-left: 15px;
+      margin: 0 12px;
+      white-space: nowrap;
     }
 
-    footer a:hover {
+    footer .left-links a:hover,
+    footer .right-links a:hover {
       text-decoration: underline;
     }
   </style>
 </head>
 <body>
-  <!-- 上部メニュー -->
-  <div class="top-nav">
+  <!-- 上部ナビ -->
+  <nav class="top-nav" aria-label="グローバルナビゲーション">
+    <a href="#">Googleについて</a>
+    <a href="#">ストア</a>
     <a href="#">Gmail</a>
     <a href="#">画像</a>
-    <img class="app-icon" src="https://www.gstatic.com/images/branding/product/1x/googleg_32dp.png" alt="Apps">
-  </div>
+    <a href="#">ログイン</a>
+    <img
+      class="app-icon"
+      src="https://www.gstatic.com/images/branding/product/1x/googleg_32dp.png"
+      alt="Google Apps"
+      role="button"
+      tabindex="0"
+      aria-label="Google アプリ"
+    />
+  </nav>
 
   <!-- ロゴ -->
-  <div class="logo">
-    <img src="https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png" alt="Google">
+  <div class="logo" role="img" aria-label="Google ロゴ">
+    <img
+      src="https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png"
+      alt="Google"
+      width="272"
+      height="92"
+      decoding="async"
+      loading="lazy"
+    />
   </div>
 
   <!-- 検索 -->
-  <form id="searchForm" class="search-box">
-    <input type="text" id="query" placeholder="Google 検索">
-    <div>
-      <input type="submit" value="Google 検索">
-      <input type="button" value="I'm Feeling Lucky" onclick="window.location.href='https://www.google.com/doodles';">
+  <form id="searchForm" class="search-box" role="search" aria-label="Google検索フォーム">
+    <input
+      type="text"
+      id="query"
+      name="q"
+      placeholder="Google 検索"
+      autocomplete="off"
+      aria-label="検索語句"
+      required
+      autofocus
+    />
+    <div class="buttons">
+      <input type="submit" value="Google 検索" />
+      <input
+        type="button"
+        value="I'm Feeling Lucky"
+        onclick="window.location.href='https://www.google.com/doodles';"
+        aria-label="I'm Feeling Luckyボタン"
+      />
     </div>
   </form>
 
   <!-- モーダル -->
-  <div id="secretModal">
+  <div id="secretModal" role="dialog" aria-modal="true" aria-labelledby="secretTitle" aria-describedby="secretDesc">
     <div id="secretContent">
-      <h2>🎉 秘密のページ 🎉</h2>
-      <p>これは「roguinn78」と検索した人だけが見られる隠しページです。</p>
-      <button id="closeBtn">閉じる</button>
+      <h2 id="secretTitle">🎉 秘密のページ 🎉</h2>
+      <p id="secretDesc">これは「roguinn78」と検索した人だけが見られる隠しページです。</p>
+      <button id="closeBtn" aria-label="モーダルを閉じる">閉じる</button>
     </div>
   </div>
 
   <!-- フッター -->
   <footer>
-    <div>日本</div>
-    <div>
+    <div class="left-links" aria-label="フッター左">
+      <a href="#">日本</a>
+      <a href="#">広告</a>
+      <a href="#">ビジネス</a>
+      <a href="#">検索の仕組み</a>
+    </div>
+    <div class="right-links" aria-label="フッター右">
       <a href="#">プライバシー</a>
       <a href="#">規約</a>
       <a href="#">設定</a>
@@ -181,8 +261,8 @@
     const modal = document.getElementById("secretModal");
     const closeBtn = document.getElementById("closeBtn");
 
-    form.addEventListener("submit", function(event) {
-      event.preventDefault();
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
       const query = document.getElementById("query").value.trim().toLowerCase();
 
       if (query === "roguinn78") {
@@ -192,8 +272,22 @@
       }
     });
 
-    closeBtn.addEventListener("click", function() {
+    closeBtn.addEventListener("click", () => {
       modal.style.display = "none";
+    });
+
+    // モーダルの外クリックで閉じる
+    window.addEventListener("click", (e) => {
+      if (e.target === modal) {
+        modal.style.display = "none";
+      }
+    });
+
+    // Enterキーでも閉じられるように
+    closeBtn.addEventListener("keyup", (e) => {
+      if (e.key === "Enter" || e.key === " ") {
+        modal.style.display = "none";
+      }
     });
   </script>
 </body>
