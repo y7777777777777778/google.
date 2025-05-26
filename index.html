@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -127,25 +128,37 @@
       display: none;
       position: fixed;
       inset: 0;
-      background-color: rgba(0, 0, 0, 0.8);
+      background-color: rgba(0, 0, 0, 0.85);
       z-index: 9999;
       justify-content: center;
       align-items: center;
+      padding: 0 10px;
     }
     #secretContent {
       background: white;
-      padding: 30px 40px;
+      padding: 16px 20px 12px 20px;
       border-radius: 8px;
-      max-width: 600px;
-      width: 90%;
-      text-align: center;
-      font-size: 18px;
-      color: #202124;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+      width: 95vw;
+      height: 85vh;
+      max-width: none;
+      max-height: none;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.3);
       position: relative;
     }
+    #secretContent h2 {
+      margin: 0 0 12px 0;
+      font-size: 24px;
+      color: #202124;
+    }
+    #secretContent p {
+      margin: 4px 0 12px 0;
+      font-size: 16px;
+      color: #202124;
+    }
     #closeBtn {
-      margin-top: 24px;
+      margin-top: auto;
       padding: 10px 24px;
       font-size: 16px;
       border: none;
@@ -155,6 +168,8 @@
       cursor: pointer;
       user-select: none;
       transition: background-color 0.2s;
+      align-self: flex-end;
+      width: 120px;
     }
     #closeBtn:hover {
       background-color: #155ab6;
@@ -184,20 +199,36 @@
     footer .right-links a:hover {
       text-decoration: underline;
     }
-    /* iframeを隠しページに入れる領域 */
+    /* iframe大きく表示 */
     #iframeContainer {
-      margin-top: 20px;
-      width: 100%;
-      height: 400px;
+      flex-grow: 1;
       border: 1px solid #ddd;
       border-radius: 6px;
-      display: none; /* 初期は非表示 */
+      display: none;
+      overflow: hidden;
+      margin-bottom: 12px;
     }
     #iframeContainer iframe {
       width: 100%;
       height: 100%;
       border: none;
       border-radius: 6px;
+      display: block;
+    }
+    /* ボタンのコンテナ */
+    #secretContent > p > button {
+      margin-right: 12px;
+      padding: 10px 16px;
+      font-size: 16px;
+      border-radius: 4px;
+      border: 1px solid #dadce0;
+      background-color: #f8f9fa;
+      cursor: pointer;
+      transition: background-color 0.2s;
+      user-select: none;
+    }
+    #secretContent > p > button:hover {
+      background-color: #e8f0fe;
     }
   </style>
 </head>
@@ -275,12 +306,9 @@
       
       <p>
         <button id="showUrlBtn">このサイトのURLを表示</button>
-      </p>
-      <p id="siteUrlText" style="margin-top: 8px; color: #1a73e8;"></p>
-      
-      <p>
         <button id="embedSiteBtn">🔗 指定サイトを埋め込み表示</button>
       </p>
+      <p id="siteUrlText" style="margin-top: 8px; color: #1a73e8; user-select: text;"></p>
 
       <div id="iframeContainer">
         <iframe src="" frameborder="0"></iframe>
@@ -293,14 +321,14 @@
   <!-- フッター -->
   <footer>
     <div class="left-links">
-      <a href="https://www.google.co.jp/intl/ja_jp/ads/" target="_blank">広告</a>
-      <a href="https://www.google.com/services/" target="_blank">ビジネス</a>
+      <a href="https://ads.google.com/intl/ja_jp/home/" target="_blank">広告</a>
+      <a href="https://business.google.com/" target="_blank">ビジネス</a>
       <a href="https://www.google.com/search/howsearchworks/" target="_blank">検索の仕組み</a>
     </div>
     <div class="right-links">
       <a href="https://policies.google.com/privacy" target="_blank">プライバシー</a>
       <a href="https://policies.google.com/terms" target="_blank">規約</a>
-      <a href="https://www.google.com/preferences" target="_blank">設定</a>
+      <a href="#" onclick="alert('設定は準備中です'); return false;">設定</a>
     </div>
   </footer>
 
