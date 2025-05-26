@@ -16,7 +16,6 @@
       color: #202124;
       user-select: none;
     }
-    /* 上部ナビゲーション */
     .top-nav {
       display: flex;
       justify-content: flex-end;
@@ -48,13 +47,11 @@
     .app-icon:hover {
       filter: grayscale(0%);
     }
-    /* ロゴ */
     .logo {
       margin: 120px auto 0;
       width: 272px;
       height: 92px;
     }
-    /* 検索ボックス */
     .search-box {
       margin-top: 24px;
       text-align: center;
@@ -71,8 +68,8 @@
       margin-left: 8px;
     }
     .search-icons img {
-      width: 28px;
-      height: 28px;
+      width: 24px;
+      height: 24px;
       cursor: pointer;
       filter: grayscale(70%);
       transition: filter 0.2s;
@@ -95,7 +92,6 @@
       box-shadow: 0 0 5px #4285f4;
       border-color: #4285f4;
     }
-    /* 検索ボタン */
     .buttons {
       margin-top: 36px;
       text-align: center;
@@ -120,7 +116,6 @@
       background-color: #f8f9fa;
       color: #202124;
     }
-    /* モーダル（初期は非表示） */
     #secretModal {
       display: none;
       position: fixed;
@@ -156,7 +151,6 @@
     #closeBtn:hover {
       background-color: #155ab6;
     }
-    /* フッター */
     footer {
       font-size: 14px;
       color: #70757a;
@@ -186,36 +180,31 @@
 </head>
 <body>
   <!-- 上部ナビ -->
-  <nav class="top-nav" aria-label="グローバルナビゲーション">
-    <a href="https://about.google/?fg=1" target="_blank" rel="noopener noreferrer">Googleについて</a>
-    <a href="https://store.google.com/" target="_blank" rel="noopener noreferrer">ストア</a>
-    <a href="https://mail.google.com/" target="_blank" rel="noopener noreferrer">Gmail</a>
-    <a href="https://www.google.com/imghp" target="_blank" rel="noopener noreferrer">画像</a>
-    <a href="https://accounts.google.com/ServiceLogin" target="_blank" rel="noopener noreferrer">ログイン</a>
+  <nav class="top-nav">
+    <a href="https://about.google/?fg=1" target="_blank">Googleについて</a>
+    <a href="https://store.google.com/" target="_blank">ストア</a>
+    <a href="https://mail.google.com/" target="_blank">Gmail</a>
+    <a href="https://www.google.com/imghp" target="_blank">画像</a>
+    <a href="https://accounts.google.com/ServiceLogin" target="_blank">ログイン</a>
     <img
       class="app-icon"
       src="https://www.gstatic.com/images/branding/product/1x/googleg_32dp.png"
       alt="Google Apps"
-      role="button"
-      tabindex="0"
-      aria-label="Google アプリ"
     />
   </nav>
 
   <!-- ロゴ -->
-  <div class="logo" role="img" aria-label="Google ロゴ">
+  <div class="logo">
     <img
       src="https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png"
       alt="Google"
       width="272"
       height="92"
-      decoding="async"
-      loading="lazy"
     />
   </div>
 
   <!-- 検索 -->
-  <form id="searchForm" class="search-box" role="search" aria-label="Google検索フォーム">
+  <form id="searchForm" class="search-box">
     <div class="search-container">
       <input
         type="text"
@@ -223,28 +212,27 @@
         name="q"
         placeholder="Google 検索"
         autocomplete="off"
-        aria-label="検索語句"
         required
         autofocus
       />
       <div class="search-icons">
+        <!-- 画像検索 -->
         <img
-          src="https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_32x32dp.png"
+          src="https://www.gstatic.com/images/icons/material/system/1x/photo_camera_grey600_24dp.png"
           alt="画像で検索"
           title="画像で検索"
           role="button"
           tabindex="0"
           onclick="window.open('https://www.google.com/imghp', '_blank')"
-          onkeypress="if(event.key==='Enter' || event.key===' ') window.open('https://www.google.com/imghp', '_blank')"
         />
+        <!-- 音声検索 -->
         <img
-          src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/Microphone_icon.svg/32px-Microphone_icon.svg.png"
+          src="https://www.gstatic.com/images/icons/material/system/1x/mic_grey600_24dp.png"
           alt="音声で検索"
           title="音声で検索"
           role="button"
           tabindex="0"
           onclick="window.open('https://www.google.com/search?q=音声検索', '_blank')"
-          onkeypress="if(event.key==='Enter' || event.key===' ') window.open('https://www.google.com/search?q=音声検索', '_blank')"
         />
       </div>
     </div>
@@ -254,35 +242,35 @@
         type="button"
         value="I'm Feeling Lucky"
         onclick="window.location.href='https://www.google.com/doodles';"
-        aria-label="I'm Feeling Luckyボタン"
       />
     </div>
   </form>
 
-  <!-- モーダル -->
-  <div id="secretModal" role="dialog" aria-modal="true" aria-labelledby="secretTitle" aria-describedby="secretDesc">
+  <!-- 秘密ページ -->
+  <div id="secretModal">
     <div id="secretContent">
-      <h2 id="secretTitle">🎉 秘密のページ 🎉</h2>
-      <p id="secretDesc">これは「roguinn78」と検索した人だけが見られる隠しページです。</p>
-      <button id="closeBtn" aria-label="モーダルを閉じる">閉じる</button>
+      <h2>🎉 秘密のページ 🎉</h2>
+      <p>これは「roguinn78」と検索した人だけが見られる隠しページです。</p>
+      <button id="closeBtn">閉じる</button>
     </div>
   </div>
 
   <!-- フッター -->
   <footer>
-    <div class="left-links" aria-label="フッター左">
-      <a href="https://www.google.co.jp/preferences?hl=ja" target="_blank" rel="noopener noreferrer">日本</a>
-      <a href="https://ads.google.com/intl/ja_jp/home/" target="_blank" rel="noopener noreferrer">広告</a>
-      <a href="https://www.google.com/services/" target="_blank" rel="noopener noreferrer">ビジネス</a>
-      <a href="https://www.google.com/search/howsearchworks/" target="_blank" rel="noopener noreferrer">検索の仕組み</a>
+    <div class="left-links">
+      <a href="https://www.google.co.jp/preferences?hl=ja" target="_blank">日本</a>
+      <a href="https://ads.google.com/intl/ja_jp/home/" target="_blank">広告</a>
+      <a href="https://www.google.com/services/" target="_blank">ビジネス</a>
+      <a href="https://www.google.com/search/howsearchworks/" target="_blank">検索の仕組み</a>
     </div>
-    <div class="right-links" aria-label="フッター右">
-      <a href="https://policies.google.com/privacy?hl=ja" target="_blank" rel="noopener noreferrer">プライバシー</a>
-      <a href="https://policies.google.com/terms?hl=ja" target="_blank" rel="noopener noreferrer">規約</a>
-      <a href="https://www.google.com/preferences?hl=ja" target="_blank" rel="noopener noreferrer">設定</a>
+    <div class="right-links">
+      <a href="https://policies.google.com/privacy?hl=ja" target="_blank">プライバシー</a>
+      <a href="https://policies.google.com/terms?hl=ja" target="_blank">規約</a>
+      <a href="https://www.google.com/preferences?hl=ja" target="_blank">設定</a>
     </div>
   </footer>
 
+  <!-- スクリプト -->
   <script>
     const form = document.getElementById("searchForm");
     const queryInput = document.getElementById("query");
@@ -292,18 +280,11 @@
     form.addEventListener("submit", (e) => {
       e.preventDefault();
       const q = queryInput.value.trim();
-
       if (q.toLowerCase() === "roguinn78") {
-        // 秘密のページを表示
         secretModal.style.display = "flex";
         queryInput.value = "";
-      } else if (q === "") {
-        // 空検索は無視
-        return;
-      } else {
-        // Google検索にリダイレクト
-        const url = `https://www.google.com/search?q=${encodeURIComponent(q)}`;
-        window.location.href = url;
+      } else if (q) {
+        window.location.href = `https://www.google.com/search?q=${encodeURIComponent(q)}`;
       }
     });
 
@@ -311,14 +292,11 @@
       secretModal.style.display = "none";
     });
 
-    // モーダル外クリックで閉じる
     secretModal.addEventListener("click", (e) => {
       if (e.target === secretModal) {
         secretModal.style.display = "none";
       }
     });
-
-    // ログインなどのリンクは本物のURLなので特別な処理なし
   </script>
 </body>
 </html>
