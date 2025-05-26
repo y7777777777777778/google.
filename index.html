@@ -124,6 +124,8 @@
       background-color: #f8f9fa;
       color: #202124;
     }
+
+    /* ===== 隠しページモーダル ===== */
     #secretModal {
       display: none;
       position: fixed;
@@ -132,48 +134,64 @@
       z-index: 9999;
       justify-content: center;
       align-items: center;
-      padding: 0 10px;
+      padding: 0;
     }
     #secretContent {
       background: white;
-      padding: 16px 20px 12px 20px;
-      border-radius: 8px;
-      width: 95vw;
-      height: 85vh;
+      border-radius: 0;
+      width: 98vw;
+      height: 98vh;
       max-width: none;
       max-height: none;
+      padding: 24px;
       display: flex;
       flex-direction: column;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+      box-shadow: none;
       position: relative;
+      overflow-y: auto;
     }
     #secretContent h2 {
-      margin: 0 0 12px 0;
-      font-size: 24px;
+      margin-top: 0;
+      font-size: 28px;
       color: #202124;
     }
     #secretContent p {
-      margin: 4px 0 12px 0;
-      font-size: 16px;
+      font-size: 18px;
       color: #202124;
+      margin: 12px 0;
+    }
+    #secretContent > p > button {
+      font-size: 18px;
+      padding: 14px 20px;
+      margin-right: 16px;
+      border-radius: 6px;
+      border: 1px solid #dadce0;
+      background-color: #f8f9fa;
+      cursor: pointer;
+      transition: background-color 0.2s;
+      user-select: none;
+    }
+    #secretContent > p > button:hover {
+      background-color: #e8f0fe;
     }
     #closeBtn {
-      margin-top: auto;
-      padding: 10px 24px;
-      font-size: 16px;
+      font-size: 18px;
+      padding: 14px 24px;
+      width: auto;
       border: none;
       background-color: #1a73e8;
       color: white;
-      border-radius: 4px;
+      border-radius: 6px;
       cursor: pointer;
       user-select: none;
       transition: background-color 0.2s;
       align-self: flex-end;
-      width: 120px;
+      margin-top: auto;
     }
     #closeBtn:hover {
       background-color: #155ab6;
     }
+
     footer {
       font-size: 14px;
       color: #70757a;
@@ -198,37 +216,6 @@
     footer .left-links a:hover,
     footer .right-links a:hover {
       text-decoration: underline;
-    }
-    /* iframe大きく表示 */
-    #iframeContainer {
-      flex-grow: 1;
-      border: 1px solid #ddd;
-      border-radius: 6px;
-      display: none;
-      overflow: hidden;
-      margin-bottom: 12px;
-    }
-    #iframeContainer iframe {
-      width: 100%;
-      height: 100%;
-      border: none;
-      border-radius: 6px;
-      display: block;
-    }
-    /* ボタンのコンテナ */
-    #secretContent > p > button {
-      margin-right: 12px;
-      padding: 10px 16px;
-      font-size: 16px;
-      border-radius: 4px;
-      border: 1px solid #dadce0;
-      background-color: #f8f9fa;
-      cursor: pointer;
-      transition: background-color 0.2s;
-      user-select: none;
-    }
-    #secretContent > p > button:hover {
-      background-color: #e8f0fe;
     }
   </style>
 </head>
@@ -298,21 +285,16 @@
     </div>
   </form>
 
-  <!-- 秘密ページ -->
+  <!-- 秘密ページモーダル -->
   <div id="secretModal">
     <div id="secretContent">
       <h2>🎉 秘密のページ 🎉</h2>
       <p>これは「roguinn78」と検索した人だけが見られる隠しページです。</p>
-      
-      <p>
-        <button id="showUrlBtn">このサイトのURLを表示</button>
-        <button id="embedSiteBtn">🔗 指定サイトを埋め込み表示</button>
-      </p>
-      <p id="siteUrlText" style="margin-top: 8px; color: #1a73e8; user-select: text;"></p>
 
-      <div id="iframeContainer">
-        <iframe src="" frameborder="0"></iframe>
-      </div>
+      <p>
+        追加したい内容やボタンなどをここに自由に配置できます。<br />
+        例：<button onclick="alert('ここに好きな処理を書けます')">ボタン</button>
+      </p>
 
       <button id="closeBtn">閉じる</button>
     </div>
@@ -328,59 +310,8 @@
     <div class="right-links">
       <a href="https://policies.google.com/privacy" target="_blank">プライバシー</a>
       <a href="https://policies.google.com/terms" target="_blank">規約</a>
-      <a href="#" onclick="alert('設定は準備中です'); return false;">設定</a>
-    </div>
-  </footer>
+      <a href="#" onclick="
+alert('ここに設定ページへのリンクなどを追加できます')">設定</a>
+</div>
 
-  <script>
-    const form = document.getElementById("searchForm");
-    const queryInput = document.getElementById("query");
-    const secretModal = document.getElementById("secretModal");
-    const closeBtn = document.getElementById("closeBtn");
-    const showUrlBtn = document.getElementById("showUrlBtn");
-    const embedSiteBtn = document.getElementById("embedSiteBtn");
-    const siteUrlText = document.getElementById("siteUrlText");
-    const iframeContainer = document.getElementById("iframeContainer");
-    const iframe = iframeContainer.querySelector("iframe");
-
-    // 隠しページで埋め込むURL（自由に変更してください）
-    const embeddedUrl = "https://example.com";
-
-    form.addEventListener("submit", (e) => {
-      e.preventDefault();
-      const query = queryInput.value.trim();
-      if (query.toLowerCase() === "roguinn78") {
-        // 隠しページ表示
-        secretModal.style.display = "flex";
-        siteUrlText.textContent = "";
-        iframeContainer.style.display = "none";
-        iframe.src = "";
-      } else {
-        // 通常の検索 → Google検索ページに遷移（同じタブ）
-        const encodedQuery = encodeURIComponent(query);
-        window.location.href = `https://www.google.com/search?q=${encodedQuery}`;
-      }
-    });
-
-    closeBtn.addEventListener("click", () => {
-      secretModal.style.display = "none";
-      queryInput.value = "";
-      queryInput.focus();
-      // iframeも閉じる
-      iframeContainer.style.display = "none";
-      iframe.src = "";
-      siteUrlText.textContent = "";
-    });
-
-    showUrlBtn.addEventListener("click", () => {
-      siteUrlText.textContent = embeddedUrl;
-    });
-
-    embedSiteBtn.addEventListener("click", () => {
-      iframe.src = embeddedUrl;
-      iframeContainer.style.display = "block";
-      siteUrlText.textContent = embeddedUrl;
-    });
-  </script>
-</body>
-</html>
+</footer> <script> const searchForm = document.getElementById('searchForm'); const secretModal = document.getElementById('secretModal'); const closeBtn = document.getElementById('closeBtn'); searchForm.addEventListener('submit', function (e) { e.preventDefault(); const query = document.getElementById('query').value.trim(); if (query.toLowerCase() === 'roguinn78') { secretModal.style.display = 'flex'; } else { window.location.href = 'https://www.google.com/search?q=' + encodeURIComponent(query); } }); closeBtn.addEventListener('click', function () { secretModal.style.display = 'none'; }); </script> </body> </html>
