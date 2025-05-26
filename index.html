@@ -13,13 +13,6 @@
       height: 100%;
       overflow: hidden;
     }
-    .main-content {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
-    }
     header, footer {
       display: flex;
       justify-content: space-between;
@@ -33,6 +26,13 @@
       margin: 0 10px;
       text-decoration: none;
       color: #555;
+    }
+    .main-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
     }
     .logo {
       margin-bottom: 30px;
@@ -65,11 +65,25 @@
       width: 100vw;
       height: 100vh;
       z-index: 999;
+      background: white;
+      flex-direction: column;
     }
-    .iframe-container iframe {
-      width: 100%;
-      height: 100%;
+    .iframe-toolbar {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      padding: 10px;
+      background-color: #f1f1f1;
+    }
+    .iframe-toolbar button {
+      padding: 8px 16px;
+      font-size: 14px;
+      cursor: pointer;
+    }
+    iframe {
+      flex-grow: 1;
       border: none;
+      width: 100%;
     }
   </style>
 </head>
@@ -101,6 +115,13 @@
   </div>
 
   <div class="iframe-container" id="iframeContainer">
+    <div class="iframe-toolbar">
+      <button onclick="loadSite('https://solar.bomberfish.ca/')">Solar OS</button>
+      <button onclick="loadSite('https://turbowarp.org/557315349')">アモアス</button>
+      <button onclick="loadSite('https://offcha.com/room/dlKme6WVrCcoPyyoanrT')">避難Chat</button>
+      <button onclick="loadSite('https://chat-u5k5.onrender.com/')">6年Chat</button>
+      <button onclick="goBack()">戻る</button>
+    </div>
     <iframe id="embeddedFrame" src=""></iframe>
   </div>
 
@@ -121,17 +142,30 @@
     function handleSearch() {
       const input = document.getElementById("searchInput").value.trim();
 
-      // 隠しコマンドのとき
       if (input === "roguinn78") {
+        // 隠しモードに切り替え
         document.getElementById("mainContent").style.display = "none";
         document.querySelector("header").style.display = "none";
         document.querySelector("footer").style.display = "none";
-        document.getElementById("iframeContainer").style.display = "block";
-        document.getElementById("embeddedFrame").src = "https://solar.bomberfish.ca/";
+        document.getElementById("iframeContainer").style.display = "flex";
+        loadSite("https://solar.bomberfish.ca/");
       } else {
-        // 通常の Google 検索に飛ばす
+        // 通常の検索へリダイレクト
         window.location.href = "https://www.google.com/search?q=" + encodeURIComponent(input);
       }
+    }
+
+    function loadSite(url) {
+      document.getElementById("embeddedFrame").src = url;
+    }
+
+    function goBack() {
+      // Google風トップに戻る
+      document.getElementById("iframeContainer").style.display = "none";
+      document.getElementById("mainContent").style.display = "flex";
+      document.querySelector("header").style.display = "flex";
+      document.querySelector("footer").style.display = "flex";
+      document.getElementById("embeddedFrame").src = "";
     }
   </script>
 </body>
