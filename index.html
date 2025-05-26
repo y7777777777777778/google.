@@ -13,8 +13,35 @@
       text-align: center;
     }
 
+    /* 上部メニュー */
+    .top-nav {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      padding: 10px 20px;
+      font-size: 14px;
+    }
+
+    .top-nav a {
+      margin-left: 15px;
+      color: #202124;
+      text-decoration: none;
+    }
+
+    .top-nav a:hover {
+      text-decoration: underline;
+    }
+
+    .app-icon {
+      width: 24px;
+      height: 24px;
+      margin-left: 15px;
+      cursor: pointer;
+    }
+
+    /* ロゴ */
     .logo {
-      margin-top: 120px;
+      margin-top: 100px;
     }
 
     .logo img {
@@ -22,6 +49,7 @@
       height: 92px;
     }
 
+    /* 検索 */
     .search-box {
       margin-top: 20px;
     }
@@ -33,10 +61,9 @@
       border: 1px solid #dfe1e5;
       border-radius: 24px;
       outline: none;
-      box-shadow: none;
     }
 
-    input[type="submit"] {
+    input[type="submit"], input[type="button"] {
       margin-top: 30px;
       padding: 10px 20px;
       font-size: 14px;
@@ -48,12 +75,12 @@
       margin-right: 10px;
     }
 
-    input[type="submit"]:hover {
+    input[type="submit"]:hover, input[type="button"]:hover {
       border: 1px solid #dadce0;
       box-shadow: 0 1px 1px rgba(0,0,0,.1);
     }
 
-    /* モーダル用スタイル */
+    /* モーダル */
     #secretModal {
       display: none;
       position: fixed;
@@ -82,13 +109,46 @@
       font-size: 16px;
       cursor: pointer;
     }
+
+    /* フッター */
+    footer {
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      font-size: 14px;
+      background-color: #f2f2f2;
+      border-top: 1px solid #e4e4e4;
+      padding: 10px 20px;
+      display: flex;
+      justify-content: space-between;
+      color: #70757a;
+    }
+
+    footer a {
+      color: #70757a;
+      text-decoration: none;
+      margin-left: 15px;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
   </style>
 </head>
 <body>
+  <!-- 上部メニュー -->
+  <div class="top-nav">
+    <a href="#">Gmail</a>
+    <a href="#">画像</a>
+    <img class="app-icon" src="https://www.gstatic.com/images/branding/product/1x/googleg_32dp.png" alt="Apps">
+  </div>
+
+  <!-- ロゴ -->
   <div class="logo">
     <img src="https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png" alt="Google">
   </div>
 
+  <!-- 検索 -->
   <form id="searchForm" class="search-box">
     <input type="text" id="query" placeholder="Google 検索">
     <div>
@@ -105,6 +165,16 @@
       <button id="closeBtn">閉じる</button>
     </div>
   </div>
+
+  <!-- フッター -->
+  <footer>
+    <div>日本</div>
+    <div>
+      <a href="#">プライバシー</a>
+      <a href="#">規約</a>
+      <a href="#">設定</a>
+    </div>
+  </footer>
 
   <script>
     const form = document.getElementById("searchForm");
