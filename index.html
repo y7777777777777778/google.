@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -75,9 +76,6 @@
       background-color: #f1f1f1;
       flex-wrap: wrap;
     }
-    .iframe-toolbar.active {
-      display: flex;
-    }
     .iframe-toolbar button {
       padding: 8px 16px;
       font-size: 14px;
@@ -109,7 +107,7 @@
       <img src="https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png" alt="Google">
     </div>
     <div class="search-box">
-      <input type="text" id="searchInput" placeholder="Google 検索または URL を入力">
+      <input type="text" id="searchInput" autocomplete="off" placeholder="Google 検索または URL を入力">
     </div>
     <div class="search-buttons">
       <button onclick="handleSearch()">Google 検索</button>
@@ -128,15 +126,13 @@
       <button onclick="goBack()">戻る</button>
     </div>
     <div class="iframe-toolbar" id="toolbar61">
-
       <button onclick="loadSite('https://solar.bomberfish.ca/')">Solar OS</button>
       <button onclick="loadSite('https://thickofit.moldeo.org/')">Interstellarプロキシ</button>
       <button onclick="loadSite('https://offcha.com/room/dlKme6WVrCcoPyyoanrT')">避難用Chat</button>
       <button onclick="loadSite('https://chat-u5k5.onrender.com/')">6年Chat</button>
       <button onclick="loadSite('https://light.6nenn.patrickwrede.com/')">自作Interstellar</button>
       <button onclick="loadSite('https://benkyou.ycare.org/')">自作shadowプロキシ</button>
-       <button onclick="loadSite('https://six1chat.onrender.com/')">6-1だけchat</button>
-      
+      <button onclick="loadSite('https://six1chat.onrender.com/')">6-1だけchat</button>
       <button onclick="goBack()">戻る</button>
     </div>
     <iframe id="embeddedFrame" src=""></iframe>
@@ -158,30 +154,22 @@
   <script>
     function handleSearch() {
       const input = document.getElementById("searchInput").value.trim();
-
       if (input === "roguinn78") {
-        showIframeMode("toolbar78", "https://solar.bomberfish.ca/");
+        showToolbar("toolbar78");
       } else if (input === "roguinn61") {
-        showIframeMode("toolbar61", "https://www.khanacademy.org/");
+        showToolbar("toolbar61");
       } else {
         window.location.href = "https://www.google.com/search?q=" + encodeURIComponent(input);
       }
     }
 
-    function showIframeMode(toolbarId, initialUrl) {
+    function showToolbar(toolbarId) {
       document.getElementById("mainContent").style.display = "none";
       document.querySelector("header").style.display = "none";
       document.querySelector("footer").style.display = "none";
       document.getElementById("iframeContainer").style.display = "flex";
-
-      // 全てのツールバーを非表示
-      document.querySelectorAll('.iframe-toolbar').forEach(tb => tb.classList.remove("active"));
-
-      // 指定のツールバーだけ表示
-      document.getElementById(toolbarId).classList.add("active");
-
-      // 最初のURL読み込み
-      loadSite(initialUrl);
+      document.getElementById(toolbarId).style.display = "flex";
+      loadSite("https://solar.bomberfish.ca/");
     }
 
     function loadSite(url) {
@@ -190,14 +178,23 @@
 
     function goBack() {
       document.getElementById("iframeContainer").style.display = "none";
+      document.getElementById("toolbar78").style.display = "none";
+      document.getElementById("toolbar61").style.display = "none";
       document.getElementById("mainContent").style.display = "flex";
       document.querySelector("header").style.display = "flex";
       document.querySelector("footer").style.display = "flex";
       document.getElementById("embeddedFrame").src = "";
-
-      // 全ツールバー非表示に戻す
-      document.querySelectorAll('.iframe-toolbar').forEach(tb => tb.classList.remove("active"));
     }
+
+    // 危機発見機能：画面が非表示になったらトップに戻す
+    document.addEventListener("visibilitychange", () => {
+      if (document.hidden) {
+        if (document.getElementById("iframeContainer").style.display === "flex") {
+          goBack();
+          console.log("危機発見機能：画面が非表示になったので戻りました");
+        }
+      }
+    });
   </script>
 </body>
 </html>
