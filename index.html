@@ -12,6 +12,7 @@
       padding: 0;
       font-family: 'Roboto', sans-serif;
       height: 100%;
+      overflow: hidden;
       background-color: #fff;
     }
 
@@ -43,27 +44,34 @@
       margin-bottom: 30px;
     }
 
-    .search-box-inner {
+    .search-box {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+    }
+
+    .search-input-container {
       display: flex;
       align-items: center;
       border: 1px solid #dfe1e5;
       border-radius: 24px;
-      padding: 10px;
-      width: 580px;
+      padding: 0 14px;
+      width: 560px;
     }
 
-    .search-box-inner input {
-      flex: 1;
+    .search-input-container input {
+      flex-grow: 1;
+      padding: 14px 10px;
       font-size: 16px;
       border: none;
       outline: none;
-      padding: 0 10px;
     }
 
-    .search-box-inner img {
+    .search-input-container img {
       width: 24px;
       height: 24px;
-      margin: 0 8px;
+      margin: 0 6px;
       cursor: pointer;
     }
 
@@ -129,14 +137,14 @@
 <body>
   <header>
     <div class="header-left">
-      <a href="https://about.google/intl/ja/">Googleについて</a>
+      <a href="https://about.google/">Googleについて</a>
       <a href="https://store.google.com/">ストア</a>
     </div>
     <div class="header-right">
       <a href="https://mail.google.com/">Gmail</a>
-      <a href="https://www.google.com/imghp">画像</a>
-      <a href="https://www.google.com/preferences">設定</a>
-      <a href="https://accounts.google.com/">ログイン</a>
+      <a href="https://www.google.co.jp/imghp">画像</a>
+      <a href="https://www.google.co.jp/preferences">設定</a>
+      <a href="https://accounts.google.com/ServiceLogin">ログイン</a>
     </div>
   </header>
 
@@ -145,11 +153,11 @@
       <img src="https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png" alt="Google">
     </div>
     <div class="search-box">
-      <div class="search-box-inner">
-        <img src="https://www.gstatic.com/images/icons/material/system/1x/search_black_24dp.png" alt="Search" onclick="handleSearch()" title="検索">
+      <div class="search-input-container">
         <input type="text" id="searchInput" placeholder="Google 検索または URL を入力" autocomplete="off">
-        <img src="https://www.gstatic.com/images/icons/material/system/1x/mic_black_24dp.png" alt="音声検索" onclick="alert('音声検索はサポートされていません');" title="音声検索">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/Google_Lens_Icon.svg/24px-Google_Lens_Icon.svg.png" alt="Google Lens" onclick="window.open('https://lens.google.com/', '_blank')" title="Google Lens">
+        <img src="https://www.gstatic.com/images/icons/material/system/1x/search_gm_blue_24dp.png" alt="検索" onclick="handleSearch()">
+        <img src="https://www.gstatic.com/images/icons/material/system/1x/mic_gm_blue_24dp.png" alt="音声" onclick="alert('音声入力は現在サポートされていません')">
+        <img src="https://bicsim.com/column/uploads/b15f197575365030f5e7ababc798ab95457b7d1e.png" alt="レンズ" onclick="alert('Googleレンズ機能は現在サポートされていません')">
       </div>
     </div>
     <div class="search-buttons">
@@ -186,11 +194,11 @@
   <footer>
     <div class="footer-left"><a href="#">日本</a></div>
     <div class="footer-right">
-      <a href="#">広告</a>
-      <a href="#">ビジネス</a>
-      <a href="#">検索の仕組み</a>
-      <a href="#">プライバシー</a>
-      <a href="#">規約</a>
+      <a href="https://ads.google.com/">広告</a>
+      <a href="https://smallbusiness.withgoogle.com/">ビジネス</a>
+      <a href="https://www.google.com/search/howsearchworks/">検索の仕組み</a>
+      <a href="https://policies.google.com/privacy">プライバシー</a>
+      <a href="https://policies.google.com/terms">規約</a>
     </div>
   </footer>
 
@@ -198,7 +206,7 @@
     function handleSearch() {
       const input = document.getElementById("searchInput");
       const value = input.value.trim();
-      input.value = "";
+      input.value = ""; // 検索バーをクリア
 
       if (value === "roguinn78") {
         openIframe("toolbar78", "https://solar.bomberfish.ca/");
@@ -231,6 +239,7 @@
       document.querySelector("footer").style.display = "flex";
     }
 
+    // 危機察知機能
     document.addEventListener("visibilitychange", () => {
       if (document.hidden) {
         goBack();
