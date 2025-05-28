@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -7,14 +6,12 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto" />
   <style>
     html, body {
-      margin: 0;
-      padding: 0;
+      margin: 0; padding: 0;
       font-family: 'Roboto', sans-serif;
       height: 100%;
       overflow: hidden;
       background-color: #fff;
     }
-
     header, footer {
       display: flex;
       justify-content: space-between;
@@ -24,13 +21,11 @@
       background: #fff;
       color: #202124;
     }
-
     .header-left a, .header-right a, .footer-left a, .footer-right a {
       margin: 0 10px;
       text-decoration: none;
       color: #202124;
     }
-
     .main-content {
       display: flex;
       flex-direction: column;
@@ -38,22 +33,18 @@
       justify-content: center;
       height: calc(100vh - 120px);
     }
-
     .logo {
       margin-bottom: 30px;
     }
-
     form {
       width: 100%;
       max-width: 600px;
       margin: auto;
     }
-
     .search-input-container {
       position: relative;
       width: 100%;
     }
-
     .search-input-container input[type="text"] {
       width: 100%;
       padding: 10px 10px 10px 40px;
@@ -63,7 +54,6 @@
       outline: none;
       box-sizing: border-box;
     }
-
     .search-input-container button.search-btn {
       position: absolute;
       left: 10px;
@@ -76,7 +66,6 @@
       width: 24px;
       height: 24px;
     }
-
     .search-input-container img.icon {
       position: absolute;
       top: 50%;
@@ -85,20 +74,16 @@
       height: 24px;
       cursor: pointer;
     }
-
     .icon.mic {
       right: 48px;
     }
-
     .icon.lens {
       right: 12px;
     }
-
     .search-buttons {
       margin-top: 20px;
       text-align: center;
     }
-
     .search-buttons button {
       padding: 10px 16px;
       margin: 5px;
@@ -108,19 +93,15 @@
       border-radius: 4px;
       cursor: pointer;
     }
-
     .iframe-container {
       display: none;
       position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
+      top: 0; left: 0;
+      width: 100vw; height: 100vh;
       background: white;
       flex-direction: column;
       z-index: 999;
     }
-
     .iframe-toolbar {
       display: none;
       justify-content: center;
@@ -129,23 +110,19 @@
       padding: 10px;
       background-color: #f1f1f1;
     }
-
     .iframe-toolbar.active {
       display: flex;
     }
-
     .iframe-toolbar button {
       padding: 8px 16px;
       font-size: 14px;
       cursor: pointer;
     }
-
     iframe {
       flex-grow: 1;
       border: none;
       width: 100%;
     }
-
     footer {
       position: fixed;
       bottom: 0;
@@ -258,6 +235,7 @@
   </footer>
 
   <script>
+    // 隠しページを表示するための入力チェック
     function handleCustomSearch(event) {
       const input = document.getElementById("searchInput");
       const value = input.value.trim();
@@ -270,8 +248,7 @@
         openIframe("toolbar61", "https://six1chat.onrender.com/");
         return false;
       }
-      // 普通のGoogle検索として送信（フォーム送信）される
-      return true;
+      return true; // 普通にGoogle検索に送信
     }
 
     function openIframe(toolbarId, defaultUrl) {
@@ -296,7 +273,7 @@
       document.querySelector("footer").style.display = "flex";
     }
 
-    // 危機察知機能
+    // 危機察知機能: タブが隠れたらiframeを閉じる
     document.addEventListener("visibilitychange", () => {
       if (document.hidden) {
         goBack();
