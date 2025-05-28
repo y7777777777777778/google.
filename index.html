@@ -5,6 +5,10 @@
   <meta charset="UTF-8" />
   <title>Google</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto" />
+
+  <!-- ✅ タブのアイコン（favicon）をGoogleに設定 -->
+  <link rel="icon" href="https://www.google.com/favicon.ico" />
+
   <style>
     body {
       margin: 0;
@@ -59,8 +63,8 @@
     }
 
     .search-box img {
-      width: 20px;
-      height: 20px;
+      width: 24px;
+      height: 24px;
       margin: 0 8px;
       cursor: pointer;
     }
@@ -104,10 +108,16 @@
     </div>
 
     <div class="search-box">
+      <!-- 🔍 検索アイコン -->
       <img src="https://www.google.com/images/icons/material/system/1x/search_grey600_24dp.png" alt="検索" id="searchIcon">
+
       <input type="text" id="searchInput" placeholder="Google 検索または URL を入力" />
+
+      <!-- 🎤 音声アイコン -->
       <img src="https://www.gstatic.com/images/branding/googlemic/2x/googlemic_color_24dp.png" alt="音声検索" id="voiceIcon">
-      <img src="https://www.gstatic.com/images/branding/googlelens/2x/googlelens_color_24dp.png" alt="Googleレンズ" id="lensIcon">
+
+      <!-- 📷 Googleレンズアイコン（修正版） -->
+      <img src="https://www.gstatic.com/images/branding/product/1x/lens_48dp.png" alt="Googleレンズ" id="lensIcon">
     </div>
 
     <div class="search-buttons">
@@ -131,6 +141,7 @@
     function handleSearch() {
       const query = document.getElementById("searchInput").value.trim();
       if (query === "") return;
+
       if (query === "roguinn78") {
         alert("78の隠しページに移動します（機能未実装）");
       } else if (query === "roguinn61") {
