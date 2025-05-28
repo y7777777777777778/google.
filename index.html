@@ -74,7 +74,9 @@
       gap: 10px;
       padding: 10px;
       background-color: #f1f1f1;
-      flex-wrap: wrap;
+    }
+    .iframe-toolbar.active {
+      display: flex;
     }
     .iframe-toolbar button {
       padding: 8px 16px;
@@ -91,14 +93,14 @@
 <body>
   <header>
     <div class="header-left">
-      <a href="https://about.google/">Googleについて</a>
-      <a href="https://store.google.com/">ストア</a>
+      <a href="#">Googleについて</a>
+      <a href="#">ストア</a>
     </div>
     <div class="header-right">
-      <a href="https://mail.google.com/">Gmail</a>
-      <a href="https://www.google.com/imghp">画像</a>
-      <a href="https://www.google.com/preferences?hl=ja&fg=1">設定</a>
-      <a href="https://accounts.google.com/">ログイン</a>
+      <a href="#">Gmail</a>
+      <a href="#">画像</a>
+      <a href="#">設定</a>
+      <a href="#">ログイン</a>
     </div>
   </header>
 
@@ -107,7 +109,7 @@
       <img src="https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png" alt="Google">
     </div>
     <div class="search-box">
-      <input type="text" id="searchInput" placeholder="Google 検索または URL を入力">
+      <input type="text" id="searchInput" placeholder="Google 検索または URL を入力" autocomplete="off">
     </div>
     <div class="search-buttons">
       <button onclick="handleSearch()">Google 検索</button>
@@ -132,7 +134,7 @@
       <button onclick="loadSite('https://chat-u5k5.onrender.com/')">6年Chat</button>
       <button onclick="loadSite('https://light.6nenn.patrickwrede.com/')">自作Interstellar</button>
       <button onclick="loadSite('https://benkyou.ycare.org/')">自作shadowプロキシ</button>
-      <button onclick="loadSite('https://six1chat.onrender.com/')">6-1だけChat</button>
+      <button onclick="loadSite('https://six1chat.onrender.com/')">6-1だけchat</button>
       <button onclick="goBack()">戻る</button>
     </div>
     <iframe id="embeddedFrame" src=""></iframe>
@@ -143,68 +145,55 @@
       <a href="#">日本</a>
     </div>
     <div class="footer-right">
-      <a href="https://ads.google.com/">広告</a>
-      <a href="https://smallbusiness.withgoogle.com/">ビジネス</a>
-      <a href="https://www.google.com/search/howsearchworks/">検索の仕組み</a>
-      <a href="https://policies.google.com/privacy">プライバシー</a>
-      <a href="https://policies.google.com/terms">規約</a>
+      <a href="#">広告</a>
+      <a href="#">ビジネス</a>
+      <a href="#">検索の仕組み</a>
+      <a href="#">プライバシー</a>
+      <a href="#">規約</a>
     </div>
   </footer>
 
   <script>
-    let lastUrl = ""; // 前回表示していたURL
+    const input = document.getElementById("searchInput");
+    const iframeContainer = document.getElementById("iframeContainer");
+    const mainContent = document.getElementById("mainContent");
 
     function handleSearch() {
-      const inputField = document.getElementById("searchInput");
-      const input = inputField.value.trim();
-
-      if (input === "roguinn78") {
-        inputField.value = "";
-        showToolbar("toolbar78");
-      } else if (input === "roguinn61") {
-        inputField.value = "";
-        showToolbar("toolbar61");
+      const value = input.value.trim();
+      if (value === "roguinn78") {
+        switchToToolbar("toolbar78");
+      } else if (value === "roguinn61") {
+        switchToToolbar("toolbar61");
       } else {
-        window.location.href = "https://www.google.com/search?q=" + encodeURIComponent(input);
+        window.location.href = "https://www.google.com/search?q=" + encodeURIComponent(value);
       }
     }
 
-    function showToolbar(toolbarId) {
-      document.getElementById("mainContent").style.display = "none";
+    function switchToToolbar(toolbarId) {
       document.querySelector("header").style.display = "none";
       document.querySelector("footer").style.display = "none";
-      document.getElementById("iframeContainer").style.display = "flex";
-      document.getElementById(toolbarId).style.display = "flex";
-
-      if (lastUrl) {
-        document.getElementById("embeddedFrame").src = lastUrl;
-      } else {
-        loadSite("https://solar.bomberfish.ca/");
-      }
+      mainContent.style.display = "none";
+      iframeContainer.style.display = "flex";
+      document.querySelectorAll(".iframe-toolbar").forEach(tb => tb.classList.remove("active"));
+      document.getElementById(toolbarId).classList.add("active");
+      input.value = "";  // 入力リセット
     }
 
     function loadSite(url) {
       document.getElementById("embeddedFrame").src = url;
-      lastUrl = url;
     }
 
     function goBack() {
-      document.getElementById("iframeContainer").style.display = "none";
-      document.getElementById("toolbar78").style.display = "none";
-      document.getElementById("toolbar61").style.display = "none";
-      document.getElementById("mainContent").style.display = "flex";
+      iframeContainer.style.display = "none";
+      mainContent.style.display = "flex";
       document.querySelector("header").style.display = "flex";
       document.querySelector("footer").style.display = "flex";
-      document.getElementById("searchInput").value = "";
     }
 
-    // 危機察知機能（タブ非表示時に戻る）
-    document.addEventListener("visibilitychange", () => {
-      if (document.hidden) {
-        if (document.getElementById("iframeContainer").style.display === "flex") {
-          goBack();
-          console.log("危機察知機能：非表示でトップに戻りました");
-        }
+    // 危機察知機能（画面閉じ検出）
+    document.addEventListener("visibilitychange", function () {
+      if (document.hidden && iframeContainer.style.display === "flex") {
+        goBack();
       }
     });
   </script>
