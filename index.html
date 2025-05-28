@@ -2,9 +2,9 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>Google</title>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto" />
   <style>
     html, body {
       margin: 0;
@@ -48,16 +48,40 @@
       align-items: center;
       justify-content: center;
       width: 100%;
+      max-width: 600px;
+      margin: 0 auto;
+      position: relative;
     }
 
     .search-box input {
-      width: 560px;
+      flex-grow: 1;
       padding: 14px 20px;
       font-size: 16px;
       border: 1px solid #dfe1e5;
       border-radius: 24px;
       outline: none;
       box-shadow: none;
+    }
+
+    .search-icons {
+      display: flex;
+      gap: 10px;
+      margin-left: 8px;
+    }
+
+    .icon-button {
+      background: none;
+      border: none;
+      font-size: 20px;
+      cursor: pointer;
+      user-select: none;
+      padding: 6px 8px;
+      border-radius: 50%;
+      transition: background-color 0.2s ease;
+    }
+
+    .icon-button:hover {
+      background-color: #e8e8e8;
     }
 
     .search-buttons {
@@ -135,10 +159,15 @@
 
   <div class="main-content" id="mainContent">
     <div class="logo">
-      <img src="https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png" alt="Google">
+      <img src="https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png" alt="Google" />
     </div>
     <div class="search-box">
-      <input type="text" id="searchInput" placeholder="Google 検索または URL を入力" autocomplete="off">
+      <input type="text" id="searchInput" placeholder="Google 検索または URL を入力" autocomplete="off" />
+      <div class="search-icons">
+        <button class="icon-button" id="searchBtn" title="検索">🔍</button>
+        <button class="icon-button" id="voiceBtn" title="音声検索">🎤</button>
+        <button class="icon-button" id="lensBtn" title="Googleレンズ">📷</button>
+      </div>
     </div>
     <div class="search-buttons">
       <button onclick="handleSearch()">Google 検索</button>
@@ -222,6 +251,19 @@
       if (document.hidden) {
         goBack();
       }
+    });
+
+    // アイコンボタンのイベント追加
+    document.getElementById("searchBtn").addEventListener("click", () => {
+      handleSearch();
+    });
+
+    document.getElementById("voiceBtn").addEventListener("click", () => {
+      alert("音声検索はまだ未実装です。");
+    });
+
+    document.getElementById("lensBtn").addEventListener("click", () => {
+      alert("Googleレンズ機能はまだ未実装です。");
     });
   </script>
 </body>
