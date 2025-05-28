@@ -12,7 +12,6 @@
       padding: 0;
       font-family: 'Roboto', sans-serif;
       height: 100%;
-      overflow: hidden;
       background-color: #fff;
     }
 
@@ -44,33 +43,27 @@
       margin-bottom: 30px;
     }
 
-    .search-box {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 100%;
-    }
-
     .search-box-inner {
       display: flex;
       align-items: center;
       border: 1px solid #dfe1e5;
       border-radius: 24px;
-      padding: 10px 15px;
-      width: 560px;
+      padding: 10px;
+      width: 580px;
     }
 
     .search-box-inner input {
       flex: 1;
+      font-size: 16px;
       border: none;
       outline: none;
-      font-size: 16px;
       padding: 0 10px;
     }
 
     .search-box-inner img {
       width: 24px;
       height: 24px;
+      margin: 0 8px;
       cursor: pointer;
     }
 
@@ -136,13 +129,13 @@
 <body>
   <header>
     <div class="header-left">
-      <a href="https://about.google/">Googleについて</a>
+      <a href="https://about.google/intl/ja/">Googleについて</a>
       <a href="https://store.google.com/">ストア</a>
     </div>
     <div class="header-right">
       <a href="https://mail.google.com/">Gmail</a>
       <a href="https://www.google.com/imghp">画像</a>
-      <a href="https://www.google.co.jp/preferences">設定</a>
+      <a href="https://www.google.com/preferences">設定</a>
       <a href="https://accounts.google.com/">ログイン</a>
     </div>
   </header>
@@ -156,7 +149,7 @@
         <img src="https://www.gstatic.com/images/icons/material/system/1x/search_black_24dp.png" alt="Search" onclick="handleSearch()" title="検索">
         <input type="text" id="searchInput" placeholder="Google 検索または URL を入力" autocomplete="off">
         <img src="https://www.gstatic.com/images/icons/material/system/1x/mic_black_24dp.png" alt="音声検索" onclick="alert('音声検索はサポートされていません');" title="音声検索">
-        <img src="https://www.gstatic.com/images/branding/googlelens/2x/googlelens_color_24dp.png" alt="Google Lens" onclick="window.open('https://lens.google.com/', '_blank')" title="Google Lens">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/Google_Lens_Icon.svg/24px-Google_Lens_Icon.svg.png" alt="Google Lens" onclick="window.open('https://lens.google.com/', '_blank')" title="Google Lens">
       </div>
     </div>
     <div class="search-buttons">
