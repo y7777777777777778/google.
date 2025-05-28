@@ -12,44 +12,60 @@
       font-family: 'Roboto', sans-serif;
       height: 100%;
       overflow: hidden;
+      background-color: #fff;
     }
+
     header, footer {
       display: flex;
       justify-content: space-between;
+      align-items: center;
       padding: 10px 20px;
       font-size: 14px;
-      background: #f2f2f2;
-      width: 100%;
-      box-sizing: border-box;
+      background: #fff;
+      color: #202124;
     }
+
     .header-left a, .header-right a, .footer-left a, .footer-right a {
       margin: 0 10px;
       text-decoration: none;
-      color: #555;
+      color: #202124;
     }
+
     .main-content {
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      height: 100vh;
+      height: calc(100vh - 120px);
     }
+
     .logo {
       margin-bottom: 30px;
     }
+
+    .search-box {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+    }
+
     .search-box input {
       width: 560px;
-      padding: 10px 20px;
+      padding: 14px 20px;
       font-size: 16px;
       border: 1px solid #dfe1e5;
       border-radius: 24px;
       outline: none;
+      box-shadow: none;
     }
+
     .search-buttons {
       margin-top: 20px;
     }
+
     .search-buttons button {
-      padding: 10px 20px;
+      padding: 10px 16px;
       margin: 5px;
       font-size: 14px;
       background-color: #f8f9fa;
@@ -57,6 +73,7 @@
       border-radius: 4px;
       cursor: pointer;
     }
+
     .iframe-container {
       display: none;
       position: fixed;
@@ -64,29 +81,41 @@
       left: 0;
       width: 100vw;
       height: 100vh;
-      z-index: 999;
       background: white;
       flex-direction: column;
+      z-index: 999;
     }
+
     .iframe-toolbar {
       display: none;
       justify-content: center;
+      flex-wrap: wrap;
       gap: 10px;
       padding: 10px;
       background-color: #f1f1f1;
     }
+
     .iframe-toolbar.active {
       display: flex;
     }
+
     .iframe-toolbar button {
       padding: 8px 16px;
       font-size: 14px;
       cursor: pointer;
     }
+
     iframe {
       flex-grow: 1;
       border: none;
       width: 100%;
+    }
+
+    footer {
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      background: #f2f2f2;
     }
   </style>
 </head>
@@ -141,9 +170,7 @@
   </div>
 
   <footer>
-    <div class="footer-left">
-      <a href="#">日本</a>
-    </div>
+    <div class="footer-left"><a href="#">日本</a></div>
     <div class="footer-right">
       <a href="#">広告</a>
       <a href="#">ビジネス</a>
@@ -154,29 +181,29 @@
   </footer>
 
   <script>
-    const input = document.getElementById("searchInput");
-    const iframeContainer = document.getElementById("iframeContainer");
-    const mainContent = document.getElementById("mainContent");
-
     function handleSearch() {
+      const input = document.getElementById("searchInput");
       const value = input.value.trim();
+      input.value = ""; // 検索バーをクリア
+
       if (value === "roguinn78") {
-        switchToToolbar("toolbar78");
+        openIframe("toolbar78", "https://solar.bomberfish.ca/");
       } else if (value === "roguinn61") {
-        switchToToolbar("toolbar61");
+        openIframe("toolbar61", "https://six1chat.onrender.com/");
       } else {
         window.location.href = "https://www.google.com/search?q=" + encodeURIComponent(value);
       }
     }
 
-    function switchToToolbar(toolbarId) {
+    function openIframe(toolbarId, defaultUrl) {
+      document.getElementById("mainContent").style.display = "none";
       document.querySelector("header").style.display = "none";
       document.querySelector("footer").style.display = "none";
-      mainContent.style.display = "none";
-      iframeContainer.style.display = "flex";
-      document.querySelectorAll(".iframe-toolbar").forEach(tb => tb.classList.remove("active"));
+      document.getElementById("iframeContainer").style.display = "flex";
+      document.getElementById("toolbar78").classList.remove("active");
+      document.getElementById("toolbar61").classList.remove("active");
       document.getElementById(toolbarId).classList.add("active");
-      input.value = "";  // 入力リセット
+      document.getElementById("embeddedFrame").src = defaultUrl;
     }
 
     function loadSite(url) {
@@ -184,15 +211,15 @@
     }
 
     function goBack() {
-      iframeContainer.style.display = "none";
-      mainContent.style.display = "flex";
+      document.getElementById("iframeContainer").style.display = "none";
+      document.getElementById("mainContent").style.display = "flex";
       document.querySelector("header").style.display = "flex";
       document.querySelector("footer").style.display = "flex";
     }
 
-    // 危機察知機能（画面閉じ検出）
-    document.addEventListener("visibilitychange", function () {
-      if (document.hidden && iframeContainer.style.display === "flex") {
+    // 危機察知機能
+    document.addEventListener("visibilitychange", () => {
+      if (document.hidden) {
         goBack();
       }
     });
