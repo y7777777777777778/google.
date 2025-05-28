@@ -107,7 +107,7 @@
       <img src="https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png" alt="Google">
     </div>
     <div class="search-box">
-      <input type="text" id="searchInput" autocomplete="off" placeholder="Google 検索または URL を入力">
+      <input type="text" id="searchInput" placeholder="Google 検索または URL を入力">
     </div>
     <div class="search-buttons">
       <button onclick="handleSearch()">Google 検索</button>
@@ -132,7 +132,7 @@
       <button onclick="loadSite('https://chat-u5k5.onrender.com/')">6年Chat</button>
       <button onclick="loadSite('https://light.6nenn.patrickwrede.com/')">自作Interstellar</button>
       <button onclick="loadSite('https://benkyou.ycare.org/')">自作shadowプロキシ</button>
-      <button onclick="loadSite('https://six1chat.onrender.com/')">6-1だけchat</button>
+      <button onclick="loadSite('https://six1chat.onrender.com/')">6-1だけChat</button>
       <button onclick="goBack()">戻る</button>
     </div>
     <iframe id="embeddedFrame" src=""></iframe>
@@ -152,11 +152,17 @@
   </footer>
 
   <script>
+    let lastUrl = ""; // 前回表示していたURL
+
     function handleSearch() {
-      const input = document.getElementById("searchInput").value.trim();
+      const inputField = document.getElementById("searchInput");
+      const input = inputField.value.trim();
+
       if (input === "roguinn78") {
+        inputField.value = "";
         showToolbar("toolbar78");
       } else if (input === "roguinn61") {
+        inputField.value = "";
         showToolbar("toolbar61");
       } else {
         window.location.href = "https://www.google.com/search?q=" + encodeURIComponent(input);
@@ -169,11 +175,17 @@
       document.querySelector("footer").style.display = "none";
       document.getElementById("iframeContainer").style.display = "flex";
       document.getElementById(toolbarId).style.display = "flex";
-      loadSite("https://solar.bomberfish.ca/");
+
+      if (lastUrl) {
+        document.getElementById("embeddedFrame").src = lastUrl;
+      } else {
+        loadSite("https://solar.bomberfish.ca/");
+      }
     }
 
     function loadSite(url) {
       document.getElementById("embeddedFrame").src = url;
+      lastUrl = url;
     }
 
     function goBack() {
@@ -183,15 +195,15 @@
       document.getElementById("mainContent").style.display = "flex";
       document.querySelector("header").style.display = "flex";
       document.querySelector("footer").style.display = "flex";
-      document.getElementById("embeddedFrame").src = "";
+      document.getElementById("searchInput").value = "";
     }
 
-    // 危機発見機能：画面が非表示になったらトップに戻す
+    // 危機察知機能（タブ非表示時に戻る）
     document.addEventListener("visibilitychange", () => {
       if (document.hidden) {
         if (document.getElementById("iframeContainer").style.display === "flex") {
           goBack();
-          console.log("危機発見機能：画面が非表示になったので戻りました");
+          console.log("危機察知機能：非表示でトップに戻りました");
         }
       }
     });
